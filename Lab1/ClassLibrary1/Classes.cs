@@ -133,13 +133,7 @@ namespace ClassLibrary1
         /// <summary>
         /// Вывод информации о человеке
         /// </summary>
-        public string GetPersonInfo
-        {
-            get
-            {
-                return $"{_name} {_lastName}; Age: {_age}; Gender: {_gender}";
-            }
-        }
+        public string GetPersonInfo => $"{Name} {LastName}; Age: {Age}; Gender: {_gender}";
 
         /// <summary>
         /// Генерирует случайного человека
