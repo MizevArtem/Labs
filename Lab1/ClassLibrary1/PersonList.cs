@@ -24,6 +24,7 @@ namespace ClassLibrary1
         public void AddPerson(Person person)
         {
             Array.Resize(ref _persons, _persons.Length + 1);
+            //TODO:
             _persons[_persons.Length - 1] = (Person)person.Clone();
         }
 
@@ -46,6 +47,7 @@ namespace ClassLibrary1
                 throw new Exception("Index does not exists");
             }
             var bufferArray = _persons;
+            //TODO: RSDN
             int pos = 0;
             _persons = new Person[_persons.Length - 1];
             for (int i = 0; i < bufferArray.Length; i++)
@@ -58,6 +60,7 @@ namespace ClassLibrary1
             }
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Удаление человека из списка по имени и фамилии
         /// </summary>
@@ -65,14 +68,15 @@ namespace ClassLibrary1
         /// <param name="lastName">Фамилия удаляемого человека</param>
         public void DeletePersonByName(string name, string lastName)
         {
+            //TODO: RSDN
             Person[] BufferArray = new Person[0];
             for (int i = 0; i < _persons.Length; i++)
             {
-                if ((_persons[i].Name != name) && (_persons[i].LastName != lastName))
-                {
-                    Array.Resize(ref BufferArray, BufferArray.Length + 1);
-                    BufferArray[BufferArray.Length - 1] = _persons[i];
-                }
+                if (_persons[i].Name == name 
+                    || _persons[i].LastName == lastName) continue;
+
+                Array.Resize(ref BufferArray, BufferArray.Length + 1);
+                BufferArray[BufferArray.Length - 1] = _persons[i];
             }
             _persons = BufferArray;
         }
@@ -95,10 +99,9 @@ namespace ClassLibrary1
             }
             else
             {
+                //TODO:
                 throw new Exception("Index does not exists");
             }
         }
-
-
     }
 }

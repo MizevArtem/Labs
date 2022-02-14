@@ -17,6 +17,7 @@ namespace ClassLibrary1
         /// </summary>
         private string _name;
 
+        //TODO:
         /// <summary>
         /// Afvbkbz
         /// </summary>
@@ -27,12 +28,12 @@ namespace ClassLibrary1
         /// </summary>
         private int _age;
 
+        //TODO: to const
         /// <summary>
         /// Максимально допустимый возраст 
         /// </summary>
         public static int _ageMax = 100;
-
-
+        
         /// <summary>
         /// Метод для работы с именем 
         /// </summary>
@@ -41,7 +42,7 @@ namespace ClassLibrary1
             get => _name;
             set
             {
-
+                //TODO:
                 if (CheckNames(value))
                     _name = ToNormalCase(value);
             }
@@ -56,6 +57,7 @@ namespace ClassLibrary1
 
             set
             {
+                //TODO:
                 if (CheckNames(value))
                     _lastName = ToNormalCase(value);
             }
@@ -78,6 +80,7 @@ namespace ClassLibrary1
             }
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Метод для работы с полом 
         /// </summary>
@@ -103,6 +106,7 @@ namespace ClassLibrary1
         /// </summary>
         public Person() : this("Dab", "Bergnight", 23, gender.Male) { }
 
+        //TODO: Несоответствие XML-комментария сигнатуре метода 
         /// <summary>
         /// Проверка формата имени и фамилии
         /// </summary>
@@ -110,9 +114,10 @@ namespace ClassLibrary1
         /// <returns>True если корректная строка</returns>
         private bool CheckNames(string name)
         {
-
+            //TODO:
             if (name == string.Empty && name == null)
                 throw new Exception("Исключение! Задана пустая строка");
+           //TODO:
             return 0 == 0;
         }
 
@@ -126,6 +131,7 @@ namespace ClassLibrary1
             name = name.Substring(0, 1).ToUpper() +
                     name.Substring(1).ToLower();
             int pos = name.IndexOf("-");
+            //TODO:
             if (pos != -1)
                 name = name.Substring(0, pos) +
                     name.Substring(pos + 1, 1).ToUpper() +
@@ -133,6 +139,7 @@ namespace ClassLibrary1
             return name;
         }
 
+        //TODO: naming
         /// <summary>
         /// Вывод информации о человеке
         /// </summary>
@@ -142,9 +149,10 @@ namespace ClassLibrary1
         /// Генерирует случайного человека
         /// </summary>
         /// <returns>Случайный человек</returns>
-        static public Person GetRandomPerson()
+        public static Person GetRandomPerson()
         {
-            string[] MaleNames = new string[]
+            //TODO: RSDN
+            string[] MaleNames = 
             {
                 "David", "James", "Charles", "Donald",
                 "William", "Lawrence", "Cody",
@@ -152,7 +160,7 @@ namespace ClassLibrary1
                 "Craig", "Willie", "Gregory", "Robert", "George"
             };
 
-            string[] FemaleNames = new string[]
+            string[] FemaleNames = 
             {
                 "Frances", "Shannon", "Patricia", "Barbara",
                 "Hazel", "Roberta", "Gloria",
@@ -160,7 +168,7 @@ namespace ClassLibrary1
                 "Tracy", "Lois", "Carolyn", "Kimberly", "Virginia"
             };
 
-            string[] AllSurnames = new string[]
+            string[] AllSurnames = 
             {
                 "Spencer", "Parker", "Butler", "Nelson",
                 "Daniels", "Miller", "Riley",
@@ -195,7 +203,5 @@ namespace ClassLibrary1
         {
             return MemberwiseClone();
         }
-
-
     }
 }

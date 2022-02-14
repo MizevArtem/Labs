@@ -6,6 +6,7 @@ namespace ConsoleApp1
     class Program
     {
         static PersonList[] Lists;
+
         public static void Main(string[] args)
         {
             if (true)
