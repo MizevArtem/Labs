@@ -46,13 +46,13 @@ namespace ConsoleApp1
             Console.WriteLine();
         }
 
-        static void FillingLists(int CountElements)
+        static void FillingLists(int сountElements)
         {
             Lists = new PersonList[2];
             for (int i = 0; i < 2; i++)
             {
                 Lists[i] = new PersonList();
-                for (int j = 0; j < CountElements; j++)
+                for (int j = 0; j < сountElements; j++)
                 {
                     Lists[i].AddPerson(Person.GetRandomPerson());
                 }

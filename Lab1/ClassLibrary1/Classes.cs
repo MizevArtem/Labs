@@ -105,10 +105,10 @@ namespace ClassLibrary1
         /// </summary>
         /// <param name="Name">Имя или фамилия для проверки</param>
         /// <returns>True если корректная строка</returns>
-        private bool CheckNames(string Name)
+        private bool CheckNames(string name)
         {
             
-            if (Name == string.Empty && Name == null)
+            if (name == string.Empty && name == null)
                 throw new Exception("Исключение! Задана пустая строка");
             return 0 == 0;
         }
@@ -116,18 +116,18 @@ namespace ClassLibrary1
         /// <summary>
         /// Приведение необходимых символов имени/фамилии к верхнему регистру
         /// </summary>
-        /// <param name="Name">Фамилия или имя для преобразования</param>
+        /// <param name="name">Фамилия или имя для преобразования</param>
         /// <returns>Имя/фамилия с корректным регистром</returns>
-        private string ToNormalCase(string Name)
+        private string ToNormalCase(string name)
         {
-            Name = Name.Substring(0, 1).ToUpper() +
-                    Name.Substring(1).ToLower();
-            int pos = Name.IndexOf("-");
+            name = name.Substring(0, 1).ToUpper() +
+                    name.Substring(1).ToLower();
+            int pos = name.IndexOf("-");
             if (pos != -1)
-                Name = Name.Substring(0, pos) +
-                    Name.Substring(pos + 1, 1).ToUpper() +
-                    Name.Substring(pos + 2).ToLower();
-            return Name;
+                name = name.Substring(0, pos) +
+                    name.Substring(pos + 1, 1).ToUpper() +
+                    name.Substring(pos + 2).ToLower();
+            return name;
         }
 
         /// <summary>
@@ -173,22 +173,22 @@ namespace ClassLibrary1
                 "Wilson", "Gonzales", "Tran", "Morgan",
             };
             Random random = new Random();
-            gender Gender = (gender)random.Next(0, 2);
-            string Name;
-            switch (Gender)
+            gender gender = (gender)random.Next(0, 2);
+            string name;
+            switch (gender)
             {
                 case gender.Male:
-                    Name = MaleNames[random.Next(MaleNames.Length)];
+                    name = MaleNames[random.Next(MaleNames.Length)];
                     break;
                 case gender.Female:
-                    Name = FemaleNames[random.Next(FemaleNames.Length)];
+                    name = FemaleNames[random.Next(FemaleNames.Length)];
                     break;
                 default:
                     return new Person("John", "Potter", 0, gender.Male);
             }
-            string LastName = AllSurnames[random.Next(AllSurnames.Length)];
+            string lastName = AllSurnames[random.Next(AllSurnames.Length)];
             int age = random.Next(0, Person._ageMax);
-            return new Person(Name, LastName, age, Gender);
+            return new Person(name, lastName, age, gender);
         }
 
         /// <summary>
@@ -241,14 +241,14 @@ namespace ClassLibrary1
             {
                 throw new Exception("Index does not exists");
             }
-            var BufferArray = _persons;
+            var bufferArray = _persons;
             int pos = 0;
             _persons = new Person[_persons.Length - 1];
-            for (int i = 0; i < BufferArray.Length; i++)
+            for (int i = 0; i < bufferArray.Length; i++)
             {
                 if (i != index)
                 {
-                    _persons[pos] = BufferArray[i];
+                    _persons[pos] = bufferArray[i];
                     pos++;
                 }
             }
@@ -258,13 +258,13 @@ namespace ClassLibrary1
         /// Удаление человека из списка по имени и фамилии
         /// </summary>
         /// <param name="name">Имя удаялемого человека</param>
-        /// <param name="LastName">Фамилия удаляемого человека</param>
-        public void DeletePersonByName(string name, string LastName)
+        /// <param name="lastName">Фамилия удаляемого человека</param>
+        public void DeletePersonByName(string name, string lastName)
         {
             Person[] BufferArray = new Person[0];
             for (int i = 0; i < _persons.Length; i++)
             {
-                if ((_persons[i].Name != name) && (_persons[i].LastName != LastName))
+                if ((_persons[i].Name != name) && (_persons[i].LastName != lastName))
                 {
                     Array.Resize(ref BufferArray, BufferArray.Length + 1);
                     BufferArray[BufferArray.Length - 1] = _persons[i];
