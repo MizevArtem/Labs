@@ -1,8 +1,11 @@
 ﻿namespace ClassLibrary1
 {
-    //TODO: XML
-    //TODO: RSDN
-   public enum gender
+    //TODO: XML | Добавлено
+    //TODO: RSDN | Переименовано
+    /// <summary>
+    /// Возмождные гендеры человека 
+    /// </summary>
+    public enum Gender
     {
         Male,
         Female

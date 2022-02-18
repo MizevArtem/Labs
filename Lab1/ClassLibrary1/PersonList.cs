@@ -24,8 +24,8 @@ namespace ClassLibrary1
         public void AddPerson(Person person)
         {
             Array.Resize(ref _persons, _persons.Length + 1);
-            //TODO:
-            _persons[_persons.Length - 1] = (Person)person.Clone();
+            //TODO: | Удален Сlone
+            _persons[_persons.Length - 1] = person;
         }
 
         /// <summary>
@@ -44,41 +44,43 @@ namespace ClassLibrary1
         {
             if (index < 0 || index > _persons.Length - 1)
             {
-                throw new Exception("Index does not exists");
+                throw new Exception($"Отсутствует запись под номером {index + 1}");
             }
             var bufferArray = _persons;
-            //TODO: RSDN
-            int pos = 0;
+            //TODO: RSDN | Переименовано
+            int position = 0;
             _persons = new Person[_persons.Length - 1];
             for (int i = 0; i < bufferArray.Length; i++)
             {
                 if (i != index)
                 {
-                    _persons[pos] = bufferArray[i];
-                    pos++;
+                    _persons[position] = bufferArray[i];
+                    position++;
                 }
             }
         }
 
-        //TODO: RSDN
+        //TODO: RSDN | Переименовано
         /// <summary>
         /// Удаление человека из списка по имени и фамилии
         /// </summary>
         /// <param name="name">Имя удаялемого человека</param>
         /// <param name="lastName">Фамилия удаляемого человека</param>
-        public void DeletePersonByName(string name, string lastName)
+        public bool DeletePersonByAnthroponym(string name, string lastName)
         {
-            //TODO: RSDN
-            Person[] BufferArray = new Person[0];
+            //TODO: RSDN | Переименовано
+            Person[] bufferArray = new Person[0];
+            bool deleted = false;
             for (int i = 0; i < _persons.Length; i++)
             {
                 if (_persons[i].Name == name 
                     || _persons[i].LastName == lastName) continue;
-
-                Array.Resize(ref BufferArray, BufferArray.Length + 1);
-                BufferArray[BufferArray.Length - 1] = _persons[i];
+                Array.Resize(ref bufferArray, bufferArray.Length + 1);
+                bufferArray[bufferArray.Length - 1] = _persons[i];
+                deleted = true;
             }
-            _persons = BufferArray;
+            _persons = bufferArray;
+            return deleted;
         }
 
         /// <summary>
@@ -99,8 +101,8 @@ namespace ClassLibrary1
             }
             else
             {
-                //TODO:
-                throw new Exception("Index does not exists");
+                //TODO: | Изменен текст исключения
+                throw new Exception("Не существует записи с данным номером");
             }
         }
     }

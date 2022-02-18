@@ -10,16 +10,16 @@ namespace ClassLibrary1
     /// Класс Person 
     /// Включает в себя информацию о имени, фамилии, возрасте и поле человека
     /// </summary>
-    public class Person : ICloneable
+    public class Person
     {
         /// <summary>
         /// Имя
         /// </summary>
         private string _name;
 
-        //TODO:
+        //TODO: | Исправлен summary
         /// <summary>
-        /// Afvbkbz
+        /// Фамилия
         /// </summary>
         private string _lastName;
 
@@ -28,11 +28,11 @@ namespace ClassLibrary1
         /// </summary>
         private int _age;
 
-        //TODO: to const
+        //TODO: to const | Изменено -> const
         /// <summary>
         /// Максимально допустимый возраст 
         /// </summary>
-        public static int _ageMax = 100;
+        public const int _ageMax = 100;
         
         /// <summary>
         /// Метод для работы с именем 
@@ -44,7 +44,7 @@ namespace ClassLibrary1
             {
                 //TODO:
                 if (CheckNames(value))
-                    _name = ToNormalCase(value);
+                    _name = value;
             }
         }
 
@@ -59,7 +59,7 @@ namespace ClassLibrary1
             {
                 //TODO:
                 if (CheckNames(value))
-                    _lastName = ToNormalCase(value);
+                    _lastName = value;
             }
         }
 
@@ -80,12 +80,12 @@ namespace ClassLibrary1
             }
         }
 
-        //TODO: RSDN
+        //TODO: RSDN | Переименовано
         /// <summary>
         /// Метод для работы с полом 
         /// </summary>
-        public gender _gender { get; set; }
-
+        public Gender Gender { get; set; }
+        
         /// <summary>
         /// Констукрутор класса
         /// </summary>
@@ -93,34 +93,37 @@ namespace ClassLibrary1
         /// <param name="lastName">Фамилия человека</param>
         /// <param name="age">Возраст человека</param>
         /// <param name="gender">Пол человека</param>
-        public Person(string name, string lastName, int age, gender gender)
+        public Person(string name, string lastName, int age, Gender gender)
         {
             Name = name;
             LastName = lastName;
             Age = age;
-            _gender = gender;
+            Gender = gender;
         }
 
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public Person() : this("Dab", "Bergnight", 23, gender.Male) { }
+        public Person() : this("Dab", "Bergnight", 23, Gender.Male) { }
 
-        //TODO: Несоответствие XML-комментария сигнатуре метода 
+        //TODO: Несоответствие XML-комментария сигнатуре метода | Исправлено -> name
         /// <summary>
         /// Проверка формата имени и фамилии
         /// </summary>
-        /// <param name="Name">Имя или фамилия для проверки</param>
+        /// <param name="name">Имя или фамилия для проверки</param>
         /// <returns>True если корректная строка</returns>
         private bool CheckNames(string name)
         {
             //TODO:
             if (name == string.Empty && name == null)
-                throw new Exception("Исключение! Задана пустая строка");
-           //TODO:
-            return 0 == 0;
+                throw new ArgumentNullException("Исключение! Задана пустое(-ая) имя(фамилия)");
+            if (name.Any(char.IsNumber))
+                throw new FormatException("Исключение! В имени(фамилии) содержится цифра(-ы)");
+            //TODO: | Поменяно на true
+            return true;
         }
 
+        /*
         /// <summary>
         /// Приведение необходимых символов имени/фамилии к верхнему регистру
         /// </summary>
@@ -130,20 +133,21 @@ namespace ClassLibrary1
         {
             name = name.Substring(0, 1).ToUpper() +
                     name.Substring(1).ToLower();
-            int pos = name.IndexOf("-");
-            //TODO:
-            if (pos != -1)
-                name = name.Substring(0, pos) +
-                    name.Substring(pos + 1, 1).ToUpper() +
-                    name.Substring(pos + 2).ToLower();
+            int position = name.IndexOf("-");
+            //TODO: | Переименовано
+            if (position != -1)
+                name = name.Substring(0, position) +
+                    name.Substring(position + 1, 1).ToUpper() +
+                    name.Substring(position + 2).ToLower();
             return name;
         }
+        */
 
-        //TODO: naming
+        //TODO: naming | Изменено навзание (-Get)
         /// <summary>
         /// Вывод информации о человеке
         /// </summary>
-        public string GetPersonInfo => $"{Name} {LastName}; Age: {Age}; Gender: {_gender}";
+        public string PersonInfo => $"{Name} {LastName}; Age: {Age}; Gender: {Gender}";
 
         /// <summary>
         /// Генерирует случайного человека
@@ -151,8 +155,8 @@ namespace ClassLibrary1
         /// <returns>Случайный человек</returns>
         public static Person GetRandomPerson()
         {
-            //TODO: RSDN
-            string[] MaleNames = 
+            //TODO: RSDN | Переименовано-
+            string[] maleNames = 
             {
                 "David", "James", "Charles", "Donald",
                 "William", "Lawrence", "Cody",
@@ -160,7 +164,7 @@ namespace ClassLibrary1
                 "Craig", "Willie", "Gregory", "Robert", "George"
             };
 
-            string[] FemaleNames = 
+            string[] femaleNames = 
             {
                 "Frances", "Shannon", "Patricia", "Barbara",
                 "Hazel", "Roberta", "Gloria",
@@ -168,7 +172,7 @@ namespace ClassLibrary1
                 "Tracy", "Lois", "Carolyn", "Kimberly", "Virginia"
             };
 
-            string[] AllSurnames = 
+            string[] allSurnames = 
             {
                 "Spencer", "Parker", "Butler", "Nelson",
                 "Daniels", "Miller", "Riley",
@@ -178,30 +182,23 @@ namespace ClassLibrary1
                 "Wilson", "Gonzales", "Tran", "Morgan",
             };
             Random random = new Random();
-            gender gender = (gender)random.Next(0, 2);
+            Gender gender = (Gender)random.Next(0, 2);
             string name;
             switch (gender)
             {
-                case gender.Male:
-                    name = MaleNames[random.Next(MaleNames.Length)];
+                case Gender.Male:
+                    name = maleNames[random.Next(maleNames.Length)];
                     break;
-                case gender.Female:
-                    name = FemaleNames[random.Next(FemaleNames.Length)];
+                case Gender.Female:
+                    name = femaleNames[random.Next(femaleNames.Length)];
                     break;
                 default:
-                    return new Person("John", "Potter", 0, gender.Male);
+                    return new Person("John", "Potter", 0, Gender.Male);
             }
-            string lastName = AllSurnames[random.Next(AllSurnames.Length)];
+            string lastName = allSurnames[random.Next(allSurnames.Length)];
             int age = random.Next(0, Person._ageMax);
             return new Person(name, lastName, age, gender);
         }
 
-        /// <summary>
-        /// Клонирование экземпляра
-        /// </summary>
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
     }
 }
