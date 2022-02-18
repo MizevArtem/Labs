@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
@@ -24,7 +20,6 @@ namespace ClassLibrary1
         public void AddPerson(Person person)
         {
             Array.Resize(ref _persons, _persons.Length + 1);
-            //TODO: | Удален Сlone
             _persons[_persons.Length - 1] = person;
         }
 
@@ -39,28 +34,26 @@ namespace ClassLibrary1
         /// <summary>
         /// Удаление человека по индексу в массиве
         /// </summary>
-        /// <<param name="index">Индекс Person-ы в массиве
+        /// <param name="index">Индекс Person-ы в массиве
         public void DeleteByIndex(int index)
         {
+            //TODO: дубль
             if (index < 0 || index > _persons.Length - 1)
             {
                 throw new Exception($"Отсутствует запись под номером {index + 1}");
             }
             var bufferArray = _persons;
-            //TODO: RSDN | Переименовано
             int position = 0;
             _persons = new Person[_persons.Length - 1];
             for (int i = 0; i < bufferArray.Length; i++)
             {
-                if (i != index)
-                {
-                    _persons[position] = bufferArray[i];
-                    position++;
-                }
+                if (i == index) continue;
+
+                _persons[position] = bufferArray[i];
+                position++;
             }
         }
-
-        //TODO: RSDN | Переименовано
+        
         /// <summary>
         /// Удаление человека из списка по имени и фамилии
         /// </summary>
@@ -68,7 +61,6 @@ namespace ClassLibrary1
         /// <param name="lastName">Фамилия удаляемого человека</param>
         public bool DeletePersonByAnthroponym(string name, string lastName)
         {
-            //TODO: RSDN | Переименовано
             Person[] bufferArray = new Person[0];
             bool deleted = false;
             for (int i = 0; i < _persons.Length; i++)
@@ -101,7 +93,7 @@ namespace ClassLibrary1
             }
             else
             {
-                //TODO: | Изменен текст исключения
+                //TODO: дубль
                 throw new Exception("Не существует записи с данным номером");
             }
         }

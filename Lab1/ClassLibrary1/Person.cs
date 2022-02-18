@@ -16,8 +16,7 @@ namespace ClassLibrary1
         /// Имя
         /// </summary>
         private string _name;
-
-        //TODO: | Исправлен summary
+        
         /// <summary>
         /// Фамилия
         /// </summary>
@@ -28,7 +27,7 @@ namespace ClassLibrary1
         /// </summary>
         private int _age;
 
-        //TODO: to const | Изменено -> const
+        //TODO: RSDN
         /// <summary>
         /// Максимально допустимый возраст 
         /// </summary>
@@ -42,7 +41,7 @@ namespace ClassLibrary1
             get => _name;
             set
             {
-                //TODO:
+                //TODO: {}
                 if (CheckNames(value))
                     _name = value;
             }
@@ -57,7 +56,7 @@ namespace ClassLibrary1
 
             set
             {
-                //TODO:
+                //TODO: {}
                 if (CheckNames(value))
                     _lastName = value;
             }
@@ -72,6 +71,7 @@ namespace ClassLibrary1
 
             set
             {
+                //TODO: bug
                 if (value < 0 && value > _ageMax)
                 {
                     throw new Exception("Некоректный возраст");
@@ -79,8 +79,7 @@ namespace ClassLibrary1
                 _age = value;
             }
         }
-
-        //TODO: RSDN | Переименовано
+        
         /// <summary>
         /// Метод для работы с полом 
         /// </summary>
@@ -105,8 +104,7 @@ namespace ClassLibrary1
         /// Конструктор по умолчанию
         /// </summary>
         public Person() : this("Dab", "Bergnight", 23, Gender.Male) { }
-
-        //TODO: Несоответствие XML-комментария сигнатуре метода | Исправлено -> name
+        
         /// <summary>
         /// Проверка формата имени и фамилии
         /// </summary>
@@ -114,12 +112,12 @@ namespace ClassLibrary1
         /// <returns>True если корректная строка</returns>
         private bool CheckNames(string name)
         {
-            //TODO:
-            if (name == string.Empty && name == null)
+            //TODO: {}
+            if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("Исключение! Задана пустое(-ая) имя(фамилия)");
             if (name.Any(char.IsNumber))
                 throw new FormatException("Исключение! В имени(фамилии) содержится цифра(-ы)");
-            //TODO: | Поменяно на true
+
             return true;
         }
 
@@ -142,8 +140,7 @@ namespace ClassLibrary1
             return name;
         }
         */
-
-        //TODO: naming | Изменено навзание (-Get)
+        
         /// <summary>
         /// Вывод информации о человеке
         /// </summary>
@@ -155,7 +152,6 @@ namespace ClassLibrary1
         /// <returns>Случайный человек</returns>
         public static Person GetRandomPerson()
         {
-            //TODO: RSDN | Переименовано-
             string[] maleNames = 
             {
                 "David", "James", "Charles", "Donald",
@@ -199,6 +195,5 @@ namespace ClassLibrary1
             int age = random.Next(0, Person._ageMax);
             return new Person(name, lastName, age, gender);
         }
-
     }
 }

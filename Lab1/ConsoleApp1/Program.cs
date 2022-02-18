@@ -6,8 +6,15 @@ using System.Text.RegularExpressions;
 
 namespace ConsoleApp1
 {
+    public enum ListMenuItems
+    {
+        AddPerson,
+
+    }
+
     class Program
     {
+        //TODO:
         static PersonList[] Lists;
 
         public static void Main(string[] args)
@@ -23,7 +30,10 @@ namespace ConsoleApp1
                 if (action == "Y")      //Тест программы по заданию л.р.   
                 {
                     Console.WriteLine("=================CREATE 2 LISTS===============");
+                    
+                    //TODO: to const
                     CreateAndFillingLists(2, 3);
+                    //TODO: дубль
                     for (int i = 0; i < 2; i++)
                         PrintList(i);
 
@@ -33,16 +43,19 @@ namespace ConsoleApp1
 
                     Console.WriteLine("=============COPY PERSON -> 2 LIST============");
                     Lists[1].AddPerson(Lists[0].GetByIndex(1));
+                    //TODO: дубль
                     for (int i = 0; i < 2; i++)
                         PrintList(i);
 
                     Console.WriteLine("==============DELETE FROM 1 LIST=============");
                     Lists[0].DeleteByIndex(1);
+                    //TODO: дубль
                     for (int i = 0; i < 2; i++)
                         PrintList(i);
 
                     Console.WriteLine("==============CLEARE ALL 2 LIST===============");
                     Lists[1].DeleteAllPeople();
+                    //TODO: дубль
                     for (int i = 0; i < 2; i++)
                         PrintList(i);
                 }
@@ -58,13 +71,15 @@ namespace ConsoleApp1
                         Console.WriteLine("4.Удалить человека по фамилии и имени");
                         Console.WriteLine("5.Полностью очистить список");
                         Console.WriteLine("6.Назад");
-                        action = Console.ReadLine();
-                        switch (action)
+                        //TODO:
+                        var action1 = (ListMenuItems)int.Parse(Console.ReadLine());
+                        switch (action1)
                         {
-                            case "1":  // Добавление нового человека
-                                string name = ReadNames("Имя");
+                            // Добавление нового человека
+                            case ListMenuItems.AddPerson:  
+                                string mySuperName = ReadNames("Имя");
                                 string lastName = ReadNames("Фамилия");
-                                BitArray checkFirstName = CheckLanguage(name);
+                                BitArray checkFirstName = CheckLanguage(mySuperName);
                                 BitArray checkLastName = CheckLanguage(lastName);
                                 //     RE       RE        RE        RE
                                 //FN   01       10        10        01
@@ -77,22 +92,25 @@ namespace ConsoleApp1
                                     Console.WriteLine("Что хотите задать заново? " +
                                                         "(F-FirstName/L-LastName)");
                                     action = Console.ReadLine();
-                                    if (action == "F")
+                                    switch (action)
                                     {
-                                        name = ReadNames("Имя");
-                                        checkFirstName = CheckLanguage(name);
+                                        case "F":
+                                            mySuperName = ReadNames("Имя");
+                                            checkFirstName = CheckLanguage(mySuperName);
+                                            break;
+                                        case "L":
+                                            lastName = ReadNames("Фамилия");
+                                            checkLastName = CheckLanguage(lastName);
+                                            break;
+                                        default:
+                                            Console.WriteLine("Не удалось Вас понять");
+                                            break;
                                     }
-                                    else if (action == "L")
-                                    {
-                                        lastName = ReadNames("Фамилия");
-                                        checkLastName = CheckLanguage(lastName);
-                                    }
-                                    else { Console.WriteLine("Не удалось Вас понять"); }
                                 }
-                                
-                                int age;
+
+                                //TODO: дубль
                                 Console.WriteLine($"Введите возраст человека от 0 до {Person._ageMax}");
-                                bool converted = int.TryParse(Console.ReadLine(), out age);
+                                bool converted = int.TryParse(Console.ReadLine(), out var age);
                                 while (!converted || age < 0 || age > Person._ageMax)
                                 {
                                     Console.WriteLine("Не корректный возраст, повторите ввод");
@@ -101,17 +119,18 @@ namespace ConsoleApp1
                                 
                                 try
                                 {
-                                    Lists[0].AddPerson(new Person(name, lastName, age, Gender.Male));
+                                    Lists[0].AddPerson(new Person(mySuperName, lastName, age, Gender.Male)); 
                                 }
                                 catch (Exception e)
                                 {
                                     Console.WriteLine(e.Message);
                                 }
                                 break;
-                            case "2":  // Выведение списка в консоль
+                            case 2:  // Выведение списка в консоль
                                 PrintList(0);
                                 break;
-                            case "3": // Удаление Person по индексу
+                            case 3: // Удаление Person по индексу
+                                //TODO: дубль
                                 Console.WriteLine("Введите номер человека в списке, которого необходимо удалить");
                                 int index;
                                 converted = int.TryParse(Console.ReadLine(), out index);
@@ -130,25 +149,20 @@ namespace ConsoleApp1
                                     Console.WriteLine(e.Message);
                                 }
                                 break;
-                            case "4":  // Удаление Person по Имени и Фамилии 
+                            case 4:  // Удаление Person по Имени и Фамилии 
                                 Console.WriteLine("Введите имя человека, которого необходимо удалить");
-                                name = Console.ReadLine();
+                                mySuperName = Console.ReadLine();
                                 Console.WriteLine("Введите фамилию человека, которого необходимо удалить");
                                 lastName = Console.ReadLine();
-                                if (Lists[0].DeletePersonByAnthroponym(name, lastName))
-                                {
-                                    Console.WriteLine($"Запись о человека \"{name} {lastName}\" удалена");
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"Данных о введеном человеке не обнаружено");
-                                }
+                                Console.WriteLine(Lists[0].DeletePersonByAnthroponym(mySuperName, lastName)
+                                    ? $"Запись о человека \"{mySuperName} {lastName}\" удалена"
+                                    : $"Данных о введеном человеке не обнаружено");
                                 break;
-                            case "5":  // Полная очистка списка
+                            case 5:  // Полная очистка списка
                                 Lists[0].DeleteAllPeople();
                                 Console.WriteLine($"Список успешно очищен");
                                 break;
-                            case "6":  // Выход назад
+                            case 6:  // Выход назад
                                 break;
                             default:  // Иное
                                 Console.WriteLine("Не удалось определить команду, повторите ввод");
@@ -221,6 +235,7 @@ namespace ConsoleApp1
             return name;
         }
 
+        //TODO:
         /// <summary>
         /// Функция определения алфавита символов в имени/фамилии
         /// </summary>
@@ -235,7 +250,8 @@ namespace ConsoleApp1
                 bitArray[0] = true;   //Russian -> 10
             }
             //language = Regex.IsMatch(name.ToLower(), @"\p{IsBasicLatin}");
-            language = name.ToLower().Any(c => (int)c > 96 && (int)c < 123);
+
+            language = name.ToLower().Any(c => (int)c > 'a' && (int)c < 'z');
             if (language)
             {
                 bitArray[1] = true; // English -> 01
