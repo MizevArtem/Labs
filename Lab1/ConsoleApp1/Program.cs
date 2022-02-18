@@ -172,7 +172,7 @@ namespace ConsoleApp1
         /// <returns>Строка с именем/фамилией</returns>
         static string ReadNames(string parameter)
         {
-            Console.WriteLine($"{parameter} нового человека:");
+            Console.WriteLine($"{parameter} нового человека (кирилица или латиница):");
             string name;
             bool badData;
             do
