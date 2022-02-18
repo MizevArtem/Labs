@@ -12,6 +12,8 @@ namespace ConsoleApp1
 
         public static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            Console.InputEncoding = System.Text.Encoding.Unicode;
             string action;
             do
             {
@@ -172,7 +174,7 @@ namespace ConsoleApp1
         /// <returns>Строка с именем/фамилией</returns>
         static string ReadNames(string parameter)
         {
-            Console.WriteLine($"{parameter} нового человека (кирилица или латиница):");
+            Console.WriteLine($"{parameter} нового человека (кириллица или латиница):");
             string name;
             bool badData;
             do
@@ -188,7 +190,7 @@ namespace ConsoleApp1
                 if (name.Any(char.IsNumber))
                 {
                     badData = true;
-                    Console.WriteLine("В строке содержится(-атся) цифра(-ы), повторите ввод");
+                    Console.WriteLine("В строке содержится(-атся) цифра(-ы), повторите ввод без них");
                     continue;
                 }
                 BitArray checkName = CheckLanguage(name);
