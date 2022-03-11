@@ -13,26 +13,31 @@ namespace ClassLibrary1
     public class Person
     {
         /// <summary>
+        /// Возраст 
+        /// </summary>
+        private int _age;
+
+        /// <summary>
         /// Имя
         /// </summary>
         private string _name;
-        
+
         /// <summary>
         /// Фамилия
         /// </summary>
         private string _lastName;
 
-        /// <summary>
-        /// Возраст 
-        /// </summary>
-        private int _age;
-
-        //TODO: RSDN
+        //TODO: RSDN | Переименовано
         /// <summary>
         /// Максимально допустимый возраст 
         /// </summary>
-        public const int _ageMax = 100;
-        
+        public const int AgeMax = 100;
+
+        /// <summary>
+        /// Минимально допустимый возраст 
+        /// </summary>
+        public const int AgeMin = 0;
+
         /// <summary>
         /// Метод для работы с именем 
         /// </summary>
@@ -41,9 +46,11 @@ namespace ClassLibrary1
             get => _name;
             set
             {
-                //TODO: {}
+                //TODO: {} | Добавлены
                 if (CheckNames(value))
+                {
                     _name = value;
+                }
             }
         }
 
@@ -56,9 +63,12 @@ namespace ClassLibrary1
 
             set
             {
-                //TODO: {}
+                //TODO: {} | Добавлены
                 if (CheckNames(value))
+                {
                     _lastName = value;
+                }
+                    
             }
         }
 
@@ -71,10 +81,10 @@ namespace ClassLibrary1
 
             set
             {
-                //TODO: bug
-                if (value < 0 && value > _ageMax)
+                //TODO: bug | Устранен
+                if (value < AgeMin || value > AgeMax)
                 {
-                    throw new Exception("Некоректный возраст");
+                    throw new Exception($"Некоректный возраст, задайте возраст от {AgeMin} до {AgeMax}");
                 }
                 _age = value;
             }
@@ -83,7 +93,7 @@ namespace ClassLibrary1
         /// <summary>
         /// Метод для работы с полом 
         /// </summary>
-        public Gender Gender { get; set; }
+        public PossibleGender Gender { get; set; }
         
         /// <summary>
         /// Констукрутор класса
@@ -92,7 +102,7 @@ namespace ClassLibrary1
         /// <param name="lastName">Фамилия человека</param>
         /// <param name="age">Возраст человека</param>
         /// <param name="gender">Пол человека</param>
-        public Person(string name, string lastName, int age, Gender gender)
+        public Person(string name, string lastName, int age, PossibleGender gender)
         {
             Name = name;
             LastName = lastName;
@@ -103,7 +113,7 @@ namespace ClassLibrary1
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public Person() : this("Dab", "Bergnight", 23, Gender.Male) { }
+        public Person() : this("Dab", "Bergnight", 23, PossibleGender.Male) { }
         
         /// <summary>
         /// Проверка формата имени и фамилии
@@ -112,34 +122,19 @@ namespace ClassLibrary1
         /// <returns>True если корректная строка</returns>
         private bool CheckNames(string name)
         {
-            //TODO: {}
+            //TODO: {} | Добавлены
             if (string.IsNullOrEmpty(name))
+            {
                 throw new ArgumentNullException("Исключение! Задана пустое(-ая) имя(фамилия)");
+            }
             if (name.Any(char.IsNumber))
+            {
                 throw new FormatException("Исключение! В имени(фамилии) содержится цифра(-ы)");
+            }
+                
 
             return true;
         }
-
-        /*
-        /// <summary>
-        /// Приведение необходимых символов имени/фамилии к верхнему регистру
-        /// </summary>
-        /// <param name="name">Фамилия или имя для преобразования</param>
-        /// <returns>Имя/фамилия с корректным регистром</returns>
-        private string ToNormalCase(string name)
-        {
-            name = name.Substring(0, 1).ToUpper() +
-                    name.Substring(1).ToLower();
-            int position = name.IndexOf("-");
-            //TODO: | Переименовано
-            if (position != -1)
-                name = name.Substring(0, position) +
-                    name.Substring(position + 1, 1).ToUpper() +
-                    name.Substring(position + 2).ToLower();
-            return name;
-        }
-        */
         
         /// <summary>
         /// Вывод информации о человеке
@@ -178,22 +173,22 @@ namespace ClassLibrary1
                 "Wilson", "Gonzales", "Tran", "Morgan",
             };
             Random random = new Random();
-            Gender gender = (Gender)random.Next(0, 2);
+            PossibleGender gender = (PossibleGender)random.Next(0, 2);
             string name;
             switch (gender)
             {
-                case Gender.Male:
+                case PossibleGender.Male:
                     name = maleNames[random.Next(maleNames.Length)];
                     break;
-                case Gender.Female:
+                case PossibleGender.Female:
                     name = femaleNames[random.Next(femaleNames.Length)];
                     break;
                 default:
-                    return new Person("John", "Potter", 0, Gender.Male);
+                    return new Person("John", "Potter", 0, PossibleGender.Male);
             }
             string lastName = allSurnames[random.Next(allSurnames.Length)];
-            int age = random.Next(0, Person._ageMax);
-            return new Person(name, lastName, age, gender);
+            int age = random.Next(0, Person.AgeMax);
+            return new Person(name, lastName, age, (PossibleGender) gender);
         }
     }
 }

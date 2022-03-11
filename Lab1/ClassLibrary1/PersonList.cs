@@ -37,11 +37,9 @@ namespace ClassLibrary1
         /// <param name="index">Индекс Person-ы в массиве
         public void DeleteByIndex(int index)
         {
-            //TODO: дубль
-            if (index < 0 || index > _persons.Length - 1)
-            {
-                throw new Exception($"Отсутствует запись под номером {index + 1}");
-            }
+            //TODO: дубль | Устранен
+            CheckIndex(index);
+
             var bufferArray = _persons;
             int position = 0;
             _persons = new Person[_persons.Length - 1];
@@ -53,7 +51,7 @@ namespace ClassLibrary1
                 position++;
             }
         }
-        
+
         /// <summary>
         /// Удаление человека из списка по имени и фамилии
         /// </summary>
@@ -65,7 +63,7 @@ namespace ClassLibrary1
             bool deleted = false;
             for (int i = 0; i < _persons.Length; i++)
             {
-                if (_persons[i].Name == name 
+                if (_persons[i].Name == name
                     || _persons[i].LastName == lastName) continue;
                 Array.Resize(ref bufferArray, bufferArray.Length + 1);
                 bufferArray[bufferArray.Length - 1] = _persons[i];
@@ -87,15 +85,19 @@ namespace ClassLibrary1
         /// <returns>Возвращение элементы по индексу</returns> 
         public Person GetByIndex(int index)
         {
-            if (index >= 0 && index < _persons.Length)
-            {
-                return _persons[index];
-            }
-            else
-            {
-                //TODO: дубль
-                throw new Exception("Не существует записи с данным номером");
-            }
+            //TODO: дубль | Устранен
+            CheckIndex(index);
+            return _persons[index];
+        }
+
+        /// <summary>
+        /// Проверка наличия индекса в списке
+        /// </summary>
+        /// <param name="index">Индекс элемента</param>
+        private void CheckIndex(int index)
+        {
+            if (index < 0 || index > _persons.Length - 1)
+                throw new ArgumentException("Не существует записи с данным номером");
         }
     }
 }

@@ -5,8 +5,9 @@
     /// <summary>
     /// Возмождные гендеры человека 
     /// </summary>
-    public enum Gender
+    public enum PossibleGender
     {
+        Indefinite,
         Male,
         Female
     }
