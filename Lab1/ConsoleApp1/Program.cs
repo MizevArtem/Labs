@@ -47,6 +47,7 @@ namespace ConsoleApp1
                 else if (action == "N") 
                 {
                     CreateAndFillingLists(1);
+                    ListMenuItems actionList;
                     do
                     {
                         Console.WriteLine("Введите номер действия, которое хотите выполнить:");
@@ -57,7 +58,7 @@ namespace ConsoleApp1
                         Console.WriteLine("5.Полностью очистить список");
                         Console.WriteLine("6.Назад");
                         //TODO: | done
-                        var actionList = (ListMenuItems)int.Parse(Console.ReadLine()) - 1;
+                        actionList = (ListMenuItems)int.Parse(Console.ReadLine()) - 1;
                         switch (actionList)
                         {
                             case ListMenuItems.AddPerson:                                                              
@@ -113,7 +114,7 @@ namespace ConsoleApp1
                         }
                         Console.WriteLine();
                     //Заверешние ручной работы с PersonList
-                    } while (action != "6");    
+                    } while (actionList != ListMenuItems.Exit);    
                 }
                 else if (action != "exit")
                 {
