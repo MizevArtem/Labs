@@ -354,9 +354,9 @@ namespace ConsoleApp1
         }
 
         /// <summary>
-        /// Вывод в консоль 
+        /// Вывод в консоль содержимого листов
         /// </summary>
-        /// <param name="index">Номер листа в глобальном массиве</param>
+        /// <param name="indexs">Номера листов в глобальном массиве</param>
         static void PrintList(int [] indexs)  
         {
             foreach (var index in indexs)
