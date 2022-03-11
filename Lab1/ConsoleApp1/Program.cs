@@ -22,7 +22,7 @@ namespace ConsoleApp1
 
     class Program
     {
-        //TODO: | Дописано summary
+        //TODO: убрать из статика.
         /// <summary>
         /// Массив листов для работы программы
         /// </summary>
@@ -57,7 +57,8 @@ namespace ConsoleApp1
                         Console.WriteLine("4.Удалить человека по фамилии и имени");
                         Console.WriteLine("5.Полностью очистить список");
                         Console.WriteLine("6.Назад");
-                        //TODO: | done
+
+                        //TODO: bug
                         actionList = (ListMenuItems)int.Parse(Console.ReadLine()) - 1;
                         switch (actionList)
                         {
@@ -76,14 +77,11 @@ namespace ConsoleApp1
                                 PrintList(new int[] {0});
                                 break;
                             case ListMenuItems.DeletePersonByIndex:
-                                //TODO: дубль | Ликвидирован
-                                int index = -1;
                                 var actionsTuple = Tuple.Create<Action, string>
                                 (
                                     () =>
                                     {
-                                        if (int.TryParse(Console.ReadLine(), out index)) { }
-                                        else
+                                        if (!int.TryParse(Console.ReadLine(), out int index))
                                         {
                                             throw new FormatException("Не удалось распознать номер");
                                         }
@@ -116,6 +114,7 @@ namespace ConsoleApp1
                     //Заверешние ручной работы с PersonList
                     } while (actionList != ListMenuItems.Exit);    
                 }
+                //TODO: const
                 else if (action != "exit")
                 {
                     Console.WriteLine("Не удалось определить ответ.");
@@ -135,9 +134,7 @@ namespace ConsoleApp1
             const int countList = 2;
             const int countElements = 3;
             Console.WriteLine("=================CREATE 2 LISTS===============");
-            //TODO: to const | ->const
             CreateAndFillingLists(countList, countElements);
-            //TODO: дубль | Ликвидирован (?)
             PrintList(new int[] { 0, 1 });
 
             Console.WriteLine("==============ADD PERSON -> 1 LIST============");
@@ -146,17 +143,14 @@ namespace ConsoleApp1
 
             Console.WriteLine("=============COPY PERSON -> 2 LIST============");
             Lists[1].AddPerson(Lists[0].GetByIndex(1));
-            //TODO: дубль | Ликвидирован (?)
             PrintList(new int[] { 0, 1 });
 
             Console.WriteLine("==============DELETE FROM 1 LIST=============");
             Lists[0].DeleteByIndex(1);
-            //TODO: дубль | Ликвидирован (?)
             PrintList(new int[] { 0, 1 });
 
             Console.WriteLine("==============CLEARE ALL 2 LIST===============");
             Lists[1].DeleteAllPeople();
-            //TODO: дубль | Ликвидирован (?)
             PrintList(new int[] { 0, 1 });
         }
 
@@ -194,6 +188,7 @@ namespace ConsoleApp1
         /// Функция обработки чтения имени/фамилии
         /// </summary>
         /// <param name="parameter">Строка "Имя" или "Фамилия"</param>
+        /// //TODO: XML
         /// <returns>Строка с именем/фамилией</returns>
         static string ReadNames(string parameter, out List<string> languageContained)
         {
@@ -239,8 +234,7 @@ namespace ConsoleApp1
             }
             return name;
         }
-
-        //TODO: | Перелопачено
+        
         /// <summary>
         /// Функция определения алфавита(-ов) символов в имени/фамилии
         /// </summary>
@@ -315,7 +309,7 @@ namespace ConsoleApp1
                         break;
                 }
             }
-            //TODO: дубль | Ликвидирован
+            //TODO:
             int age = -1;
             var actionsTuple = Tuple.Create<Action, string>
             (
@@ -335,6 +329,7 @@ namespace ConsoleApp1
             );
             ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
             
+
             Gender gender = PossibleGender.Indefinite;
             actionsTuple = Tuple.Create<Action, string>
             (

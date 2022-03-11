@@ -26,8 +26,7 @@ namespace ClassLibrary1
         /// Фамилия
         /// </summary>
         private string _lastName;
-
-        //TODO: RSDN | Переименовано
+        
         /// <summary>
         /// Максимально допустимый возраст 
         /// </summary>
@@ -46,7 +45,6 @@ namespace ClassLibrary1
             get => _name;
             set
             {
-                //TODO: {} | Добавлены
                 if (CheckNames(value))
                 {
                     _name = value;
@@ -63,7 +61,6 @@ namespace ClassLibrary1
 
             set
             {
-                //TODO: {} | Добавлены
                 if (CheckNames(value))
                 {
                     _lastName = value;
@@ -81,10 +78,10 @@ namespace ClassLibrary1
 
             set
             {
-                //TODO: bug | Устранен
                 if (value < AgeMin || value > AgeMax)
                 {
-                    throw new Exception($"Некоректный возраст, задайте возраст от {AgeMin} до {AgeMax}");
+                    throw new Exception(
+                        $"Некоректный возраст, задайте возраст от {AgeMin} до {AgeMax}");
                 }
                 _age = value;
             }
@@ -122,7 +119,6 @@ namespace ClassLibrary1
         /// <returns>True если корректная строка</returns>
         private bool CheckNames(string name)
         {
-            //TODO: {} | Добавлены
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("Исключение! Задана пустое(-ая) имя(фамилия)");

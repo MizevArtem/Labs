@@ -34,10 +34,10 @@ namespace ClassLibrary1
         /// <summary>
         /// Удаление человека по индексу в массиве
         /// </summary>
+        /// //TODO: XML
         /// <param name="index">Индекс Person-ы в массиве
         public void DeleteByIndex(int index)
         {
-            //TODO: дубль | Устранен
             CheckIndex(index);
 
             var bufferArray = _persons;
@@ -85,7 +85,6 @@ namespace ClassLibrary1
         /// <returns>Возвращение элементы по индексу</returns> 
         public Person GetByIndex(int index)
         {
-            //TODO: дубль | Устранен
             CheckIndex(index);
             return _persons[index];
         }
@@ -96,6 +95,7 @@ namespace ClassLibrary1
         /// <param name="index">Индекс элемента</param>
         private void CheckIndex(int index)
         {
+            //TODO: {}
             if (index < 0 || index > _persons.Length - 1)
                 throw new ArgumentException("Не существует записи с данным номером");
         }
