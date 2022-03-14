@@ -22,31 +22,31 @@ namespace ConsoleApp1
 
     class Program
     {
-        //TODO: убрать из статика.
-        /// <summary>
-        /// Массив листов для работы программы
-        /// </summary>
-        static PersonList[] Lists;
+        //TODO: убрать из статика. | +
 
         public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
+
+            PersonList[] Lists = new PersonList[0];
+
             string action;
+            string exitAction = "exit";
             do
             {
                 Console.WriteLine("Хотите протестировать программу? (Y/N)");
-                Console.WriteLine("Если хотите завершить работу программы введите \"exit\"");
+                Console.WriteLine($"Если хотите завершить работу программы введите \"{exitAction}\"");
                 action = Console.ReadLine();
                 //Тест программы по заданию л.р.   
                 if (action == "Y")      
                 {
-                    TestProgram();
+                    TestProgram(ref Lists);
                 }
                 //Ручная работа с PersonList
                 else if (action == "N") 
                 {
-                    CreateAndFillingLists(1);
+                    CreateAndFillingLists(out Lists, 1, new string[] { "Лист №1" });
                     ListMenuItems actionList;
                     do
                     {
@@ -58,69 +58,75 @@ namespace ConsoleApp1
                         Console.WriteLine("5.Полностью очистить список");
                         Console.WriteLine("6.Назад");
 
-                        //TODO: bug
-                        actionList = (ListMenuItems)int.Parse(Console.ReadLine()) - 1;
+                        //TODO: bug | +
+                        if (!int.TryParse(Console.ReadLine(), out int input))
+                        {
+                            Console.WriteLine("Не удалось распознать число");
+                            actionList = ListMenuItems.PrintList;
+                            continue;
+                        }
+                        actionList = (ListMenuItems)(input - 1);
                         switch (actionList)
                         {
-                            case ListMenuItems.AddPerson:                                                              
-                                try
+                        case ListMenuItems.AddPerson:                                                              
+                            try
+                            {
+                                Lists[0].AddPerson(CreatePerson()); 
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Не удалось создать запись о человеке!");
+                                Console.WriteLine("Пожалуйста, следуйте требованиям формата.");
+                            }
+                            break;
+                        case ListMenuItems.PrintList: 
+                            PrintList(new PersonList[] { Lists[0] });
+                            break;
+                        case ListMenuItems.DeletePersonByIndex:
+                            var actionsTuple = Tuple.Create<Action, string>
+                            (
+                                () =>
                                 {
-                                    Lists[0].AddPerson(CreatePerson()); 
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("Не удалось создать запись о человеке!");
-                                    Console.WriteLine("Пожалуйста, следуйте требованиям формата.");
-                                }
-                                break;
-                            case ListMenuItems.PrintList: 
-                                PrintList(new int[] {0});
-                                break;
-                            case ListMenuItems.DeletePersonByIndex:
-                                var actionsTuple = Tuple.Create<Action, string>
-                                (
-                                    () =>
+                                    if (!int.TryParse(Console.ReadLine(), out int index))
                                     {
-                                        if (!int.TryParse(Console.ReadLine(), out int index))
-                                        {
-                                            throw new FormatException("Не удалось распознать номер");
-                                        }
-                                        Lists[0].DeleteByIndex(index - 1);
-                                    },
-                                    $"Введите номер человека в списке, которого необходимо удалить"
-                                );
-                                ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
-                                break;
-                            case ListMenuItems.DeletePersonByAnthroponym:
-                                Console.WriteLine("Введите имя человека, которого необходимо удалить");
-                                string mySuperName = Console.ReadLine();
-                                Console.WriteLine("Введите фамилию человека, которого необходимо удалить");
-                                string lastName = Console.ReadLine();
-                                Console.WriteLine(Lists[0].DeletePersonByAnthroponym(mySuperName, lastName)
-                                    ? $"Запись о человека \"{mySuperName} {lastName}\" удалена"
-                                    : $"Данных о введеном человеке не обнаружено");
-                                break;
-                            case ListMenuItems.ClearList:
-                                Lists[0].DeleteAllPeople();
-                                Console.WriteLine($"Список успешно очищен");
-                                break;
-                            case ListMenuItems.Exit:  
-                                break;
-                            default:  
-                                Console.WriteLine("Не удалось определить команду, повторите ввод...");
-                                break;
+                                        throw new FormatException("Не удалось распознать номер");
+                                    }
+                                    Lists[0].DeleteByIndex(index - 1);
+                                },
+                                $"Введите номер человека в списке, которого необходимо удалить"
+                            );
+                            ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
+                            break;
+                        case ListMenuItems.DeletePersonByAnthroponym:
+                            Console.WriteLine("Введите имя человека, которого необходимо удалить");
+                            string mySuperName = Console.ReadLine();
+                            Console.WriteLine("Введите фамилию человека, которого необходимо удалить");
+                            string lastName = Console.ReadLine();
+                            Console.WriteLine(Lists[0].DeletePersonByAnthroponym(mySuperName, lastName)
+                                ? $"Запись о человека \"{mySuperName} {lastName}\" удалена"
+                                : $"Данных о введеном человеке не обнаружено");
+                            break;
+                        case ListMenuItems.ClearList:
+                            Lists[0].DeleteAllPeople();
+                            Console.WriteLine($"Список успешно очищен");
+                            break;
+                        case ListMenuItems.Exit:  
+                            break;
+                        default:  
+                            Console.WriteLine("Не удалось определить команду, повторите ввод...");
+                            break;
                         }
                         Console.WriteLine();
                     //Заверешние ручной работы с PersonList
                     } while (actionList != ListMenuItems.Exit);    
                 }
-                //TODO: const
-                else if (action != "exit")
+                //TODO: const | +
+                else if (action != exitAction)
                 {
                     Console.WriteLine("Не удалось определить ответ.");
                 }
             //Завершение работы с программой
-            } while (action != "exit");   
+            } while (action != exitAction);   
 
             Console.WriteLine("==================ЦеноК=======================");
             Console.ReadLine();
@@ -129,29 +135,30 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура демонстрации функционала класса
         /// </summary>
-        static void TestProgram()
+        static void TestProgram(ref PersonList[] Lists)
         {
             const int countList = 2;
             const int countElements = 3;
             Console.WriteLine("=================CREATE 2 LISTS===============");
-            CreateAndFillingLists(countList, countElements);
-            PrintList(new int[] { 0, 1 });
+            CreateAndFillingLists(out Lists, countList, 
+                                new string[] { "СЭР", "САСДУ" }, countElements);
+            PrintList(new PersonList[] { Lists[0], Lists[1] });
 
             Console.WriteLine("==============ADD PERSON -> 1 LIST============");
             Lists[0].AddPerson(Person.GetRandomPerson());
-            PrintList(new int[] { 0 });
+            PrintList(new PersonList[] { Lists[0] });
 
             Console.WriteLine("=============COPY PERSON -> 2 LIST============");
             Lists[1].AddPerson(Lists[0].GetByIndex(1));
-            PrintList(new int[] { 0, 1 });
+            PrintList(new PersonList[] { Lists[1] });
 
             Console.WriteLine("==============DELETE FROM 1 LIST=============");
             Lists[0].DeleteByIndex(1);
-            PrintList(new int[] { 0, 1 });
+            PrintList(new PersonList[] { Lists[0], Lists[1] });
 
             Console.WriteLine("==============CLEARE ALL 2 LIST===============");
             Lists[1].DeleteAllPeople();
-            PrintList(new int[] { 0, 1 });
+            PrintList(new PersonList[] { Lists[0], Lists[1] });
         }
 
         /// <summary>
@@ -188,7 +195,8 @@ namespace ConsoleApp1
         /// Функция обработки чтения имени/фамилии
         /// </summary>
         /// <param name="parameter">Строка "Имя" или "Фамилия"</param>
-        /// //TODO: XML
+        /// <param name="languageContained">Список языков из которых состоит имя или фамилия</param>
+        /// //TODO: XML | +
         /// <returns>Строка с именем/фамилией</returns>
         static string ReadNames(string parameter, out List<string> languageContained)
         {
@@ -209,14 +217,16 @@ namespace ConsoleApp1
                 if (name.Any(char.IsNumber))
                 {
                     badData = true;
-                    Console.WriteLine("В строке содержится(-атся) цифра(-ы), повторите ввод без них");
+                    Console.WriteLine("В строке содержится(-атся) цифра(-ы), " +
+                                                        "повторите ввод без них");
                     continue;
                 }
                 languageContained = CheckLanguage(name);
                 if (languageContained.Count > 1)
                 {
                     badData = true;
-                    Console.WriteLine($"{parameter} содержит символы нескольких алфавитов, повторите ввод");
+                    Console.WriteLine($"{parameter} содержит символы " +
+                                        $"нескольких алфавитов, повторите ввод");
                     continue;
                 }
             } while (badData);
@@ -309,7 +319,7 @@ namespace ConsoleApp1
                         break;
                 }
             }
-            //TODO:
+            //TODO: 
             int age = -1;
             var actionsTuple = Tuple.Create<Action, string>
             (
@@ -318,7 +328,8 @@ namespace ConsoleApp1
                     if (int.TryParse(Console.ReadLine(), out age)) { }
                     else
                     {
-                        throw new FormatException("Не удалось распознать возраст, повторите ввод...");
+                        throw new FormatException("Не удалось распознать возраст," +
+                                                                " повторите ввод...");
                     }
                     if (age < Person.AgeMin || age > Person.AgeMax)
                     {
@@ -335,10 +346,10 @@ namespace ConsoleApp1
             (
                 () =>
                 {
-                    if (Gender.TryParse(int.Parse(Console.ReadLine()), out gender))  { }
-                    else
+                    if (!Gender.TryParse(int.Parse(Console.ReadLine()), out gender))
                     {
-                        throw new FormatException("Не удалось распознать гендер, повторите ввод...");
+                        throw new FormatException("Не удалось распознать гендер," +
+                                                                " повторите ввод...");
                     }
                 },
                 $"Введите гендер человека, 1 - Мужчина, 2 - Женщина"
@@ -351,15 +362,15 @@ namespace ConsoleApp1
         /// <summary>
         /// Вывод в консоль содержимого листов
         /// </summary>
-        /// <param name="indexs">Номера листов в глобальном массиве</param>
-        static void PrintList(int [] indexs)  
+        /// <param name="Lists">Листы для вывода в консоль</param>
+        static void PrintList(in PersonList[] Lists)  
         {
-            foreach (var index in indexs)
+            foreach (var List in Lists)
             {
-                Console.WriteLine($"Список №{index + 1}:");
-                for (int i = 0; i < Lists[index].CountOfPersons; i++)
+                Console.WriteLine(List.Name);
+                for (int i = 0; i < List.CountOfPersons; i++)
                 {
-                    Console.WriteLine($"{i + 1})" + Lists[index].GetByIndex(i).PersonInfo);
+                    Console.WriteLine($"{i + 1})" + List.GetByIndex(i).PersonInfo);
                 }
                 Console.WriteLine();
             }
@@ -369,14 +380,18 @@ namespace ConsoleApp1
         /// Создание нужного количества листов в массиве с 
         /// определенным количеством элементов внутри
         /// </summary>
+        /// <param name="Lists">Листы для создания и заполнения</param>
         /// <param name="сountLists">Необходимое количество PersonList-ов</param>
+        /// <param name="names">Названия для листов</param>
         /// <param name="сountElements">Количество элементов в листах</param>
-        static void CreateAndFillingLists(int сountLists, int сountElements = 0)
+        static void CreateAndFillingLists(out PersonList[] Lists, int сountLists, 
+                                                string[] names, int сountElements = 0)
         {
             Lists = new PersonList[сountLists];
             for (int i = 0; i < сountLists; i++)
             {
                 Lists[i] = new PersonList();
+                Lists[i].Name = names[i];
                 for (int j = 0; j < сountElements; j++)
                 {
                     Lists[i].AddPerson(Person.GetRandomPerson());

@@ -9,6 +9,11 @@ namespace ClassLibrary1
     public class PersonList
     {
         /// <summary>
+        /// Имя списка
+        /// </summary>
+        public string Name;
+
+        /// <summary>
         /// Массив людей
         /// </summary>
         private Person[] _persons = new Person[0];
@@ -34,8 +39,8 @@ namespace ClassLibrary1
         /// <summary>
         /// Удаление человека по индексу в массиве
         /// </summary>
-        /// //TODO: XML
-        /// <param name="index">Индекс Person-ы в массиве
+        /// //TODO: XML | +
+        /// <param name="index">Индекс Person-ы в массиве</param>
         public void DeleteByIndex(int index)
         {
             CheckIndex(index);
@@ -64,10 +69,13 @@ namespace ClassLibrary1
             for (int i = 0; i < _persons.Length; i++)
             {
                 if (_persons[i].Name == name
-                    || _persons[i].LastName == lastName) continue;
+                    || _persons[i].LastName == lastName)
+                {
+                    deleted = true;
+                    continue;   
+                }
                 Array.Resize(ref bufferArray, bufferArray.Length + 1);
                 bufferArray[bufferArray.Length - 1] = _persons[i];
-                deleted = true;
             }
             _persons = bufferArray;
             return deleted;
@@ -95,9 +103,11 @@ namespace ClassLibrary1
         /// <param name="index">Индекс элемента</param>
         private void CheckIndex(int index)
         {
-            //TODO: {}
+            //TODO: {} | + 
             if (index < 0 || index > _persons.Length - 1)
+            {
                 throw new ArgumentException("Не существует записи с данным номером");
+            }
         }
     }
 }

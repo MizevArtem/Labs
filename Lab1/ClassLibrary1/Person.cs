@@ -127,8 +127,6 @@ namespace ClassLibrary1
             {
                 throw new FormatException("Исключение! В имени(фамилии) содержится цифра(-ы)");
             }
-                
-
             return true;
         }
         
