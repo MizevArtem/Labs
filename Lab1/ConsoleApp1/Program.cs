@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using ClassLibrary1;
-using System.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -22,13 +21,13 @@ namespace ConsoleApp1
 
     class Program
     {
-        //TODO: убрать из статика. | +
-
+       
         public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
-
+            
+            //TODO: убрать из статика. | +
             PersonList[] Lists = new PersonList[0];
 
             string action;
