@@ -27,7 +27,7 @@ namespace ConsoleApp1
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
             
-            //TODO: убрать из статика. | +
+            //TODO: RSDN
             PersonList[] Lists = new PersonList[0];
 
             string action;
@@ -56,8 +56,7 @@ namespace ConsoleApp1
                         Console.WriteLine("4.Удалить человека по фамилии и имени");
                         Console.WriteLine("5.Полностью очистить список");
                         Console.WriteLine("6.Назад");
-
-                        //TODO: bug | +
+                        
                         if (!int.TryParse(Console.ReadLine(), out int input))
                         {
                             Console.WriteLine("Не удалось распознать число");
@@ -116,15 +115,12 @@ namespace ConsoleApp1
                             break;
                         }
                         Console.WriteLine();
-                    //Заверешние ручной работы с PersonList
                     } while (actionList != ListMenuItems.Exit);    
                 }
-                //TODO: const | +
                 else if (action != exitAction)
                 {
                     Console.WriteLine("Не удалось определить ответ.");
                 }
-            //Завершение работы с программой
             } while (action != exitAction);   
 
             Console.WriteLine("==================ЦеноК=======================");
@@ -134,6 +130,8 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура демонстрации функционала класса
         /// </summary>
+        /// //TODO: RSDN
+        /// //TODO: XML
         static void TestProgram(ref PersonList[] Lists)
         {
             const int countList = 2;
@@ -190,12 +188,12 @@ namespace ConsoleApp1
             }
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Функция обработки чтения имени/фамилии
         /// </summary>
         /// <param name="parameter">Строка "Имя" или "Фамилия"</param>
         /// <param name="languageContained">Список языков из которых состоит имя или фамилия</param>
-        /// //TODO: XML | +
         /// <returns>Строка с именем/фамилией</returns>
         static string ReadNames(string parameter, out List<string> languageContained)
         {
@@ -244,6 +242,7 @@ namespace ConsoleApp1
             return name;
         }
         
+        //TODO: RSDN
         /// <summary>
         /// Функция определения алфавита(-ов) символов в имени/фамилии
         /// </summary>
@@ -267,6 +266,7 @@ namespace ConsoleApp1
             return languageContained;
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Функция преобразования в "правильный" регистр
         /// </summary>
@@ -318,7 +318,7 @@ namespace ConsoleApp1
                         break;
                 }
             }
-            //TODO: 
+
             int age = -1;
             var actionsTuple = Tuple.Create<Action, string>
             (
@@ -362,8 +362,10 @@ namespace ConsoleApp1
         /// Вывод в консоль содержимого листов
         /// </summary>
         /// <param name="Lists">Листы для вывода в консоль</param>
+        /// //TODO: RSDN
         static void PrintList(in PersonList[] Lists)  
         {
+            //TODO: RSDN
             foreach (var List in Lists)
             {
                 Console.WriteLine(List.Name);
@@ -379,6 +381,7 @@ namespace ConsoleApp1
         /// Создание нужного количества листов в массиве с 
         /// определенным количеством элементов внутри
         /// </summary>
+        /// //TODO: RSDN
         /// <param name="Lists">Листы для создания и заполнения</param>
         /// <param name="сountLists">Необходимое количество PersonList-ов</param>
         /// <param name="names">Названия для листов</param>
@@ -389,8 +392,10 @@ namespace ConsoleApp1
             Lists = new PersonList[сountLists];
             for (int i = 0; i < сountLists; i++)
             {
-                Lists[i] = new PersonList();
-                Lists[i].Name = names[i];
+                Lists[i] = new PersonList
+                {
+                    Name = names[i]
+                };
                 for (int j = 0; j < сountElements; j++)
                 {
                     Lists[i].AddPerson(Person.GetRandomPerson());

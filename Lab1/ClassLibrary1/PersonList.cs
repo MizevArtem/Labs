@@ -8,10 +8,11 @@ namespace ClassLibrary1
     /// </summary>
     public class PersonList
     {
+        //TODO:
         /// <summary>
         /// Имя списка
         /// </summary>
-        public string Name;
+        public string Name { get; set; }
 
         /// <summary>
         /// Массив людей
@@ -39,7 +40,6 @@ namespace ClassLibrary1
         /// <summary>
         /// Удаление человека по индексу в массиве
         /// </summary>
-        /// //TODO: XML | +
         /// <param name="index">Индекс Person-ы в массиве</param>
         public void DeleteByIndex(int index)
         {
@@ -103,7 +103,6 @@ namespace ClassLibrary1
         /// <param name="index">Индекс элемента</param>
         private void CheckIndex(int index)
         {
-            //TODO: {} | + 
             if (index < 0 || index > _persons.Length - 1)
             {
                 throw new ArgumentException("Не существует записи с данным номером");
