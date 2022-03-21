@@ -8,11 +8,7 @@ namespace ClassLibrary1
     /// </summary>
     public class PersonList
     {
-        //TODO:
-        /// <summary>
-        /// Имя списка
-        /// </summary>
-        public string Name { get; set; }
+        //TODO: | +
 
         /// <summary>
         /// Массив людей
@@ -51,7 +47,6 @@ namespace ClassLibrary1
             for (int i = 0; i < bufferArray.Length; i++)
             {
                 if (i == index) continue;
-
                 _persons[position] = bufferArray[i];
                 position++;
             }

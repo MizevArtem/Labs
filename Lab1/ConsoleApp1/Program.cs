@@ -27,8 +27,8 @@ namespace ConsoleApp1
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
             
-            //TODO: RSDN
-            PersonList[] Lists = new PersonList[0];
+            //TODO: RSDN | +
+            (PersonList List, string Name)[] namedLists;
 
             string action;
             string exitAction = "exit";
@@ -40,12 +40,12 @@ namespace ConsoleApp1
                 //Тест программы по заданию л.р.   
                 if (action == "Y")      
                 {
-                    TestProgram(ref Lists);
+                    TestProgram(out namedLists);
                 }
                 //Ручная работа с PersonList
                 else if (action == "N") 
                 {
-                    CreateAndFillingLists(out Lists, 1, new string[] { "Лист №1" });
+                    CreateAndFillingLists(out namedLists, 1, new string[] { "Лист №1" });
                     ListMenuItems actionList;
                     do
                     {
@@ -69,7 +69,7 @@ namespace ConsoleApp1
                         case ListMenuItems.AddPerson:                                                              
                             try
                             {
-                                Lists[0].AddPerson(CreatePerson()); 
+                                namedLists[0].List.AddPerson(CreatePerson()); 
                             }
                             catch (Exception)
                             {
@@ -78,35 +78,16 @@ namespace ConsoleApp1
                             }
                             break;
                         case ListMenuItems.PrintList: 
-                            PrintList(new PersonList[] { Lists[0] });
+                            PrintList(new (PersonList List, string Name)[] { namedLists[0] });
                             break;
                         case ListMenuItems.DeletePersonByIndex:
-                            var actionsTuple = Tuple.Create<Action, string>
-                            (
-                                () =>
-                                {
-                                    if (!int.TryParse(Console.ReadLine(), out int index))
-                                    {
-                                        throw new FormatException("Не удалось распознать номер");
-                                    }
-                                    Lists[0].DeleteByIndex(index - 1);
-                                },
-                                $"Введите номер человека в списке, которого необходимо удалить"
-                            );
-                            ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
+                            DeletePersonByIndex(namedLists[0]);
                             break;
                         case ListMenuItems.DeletePersonByAnthroponym:
-                            Console.WriteLine("Введите имя человека, которого необходимо удалить");
-                            string mySuperName = Console.ReadLine();
-                            Console.WriteLine("Введите фамилию человека, которого необходимо удалить");
-                            string lastName = Console.ReadLine();
-                            Console.WriteLine(Lists[0].DeletePersonByAnthroponym(mySuperName, lastName)
-                                ? $"Запись о человека \"{mySuperName} {lastName}\" удалена"
-                                : $"Данных о введеном человеке не обнаружено");
+                            DeletePersonByAnthroponym(namedLists[0]);
                             break;
                         case ListMenuItems.ClearList:
-                            Lists[0].DeleteAllPeople();
-                            Console.WriteLine($"Список успешно очищен");
+                                ClearList(namedLists[0]);
                             break;
                         case ListMenuItems.Exit:  
                             break;
@@ -130,32 +111,33 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура демонстрации функционала класса
         /// </summary>
-        /// //TODO: RSDN
+        /// //TODO: RSDN | +
         /// //TODO: XML
-        static void TestProgram(ref PersonList[] Lists)
+        /// <param name="namedLists">Проименовыние листы для теста программы</param>
+        public static void TestProgram(out (PersonList List, string Name)[] namedLists)
         {
             const int countList = 2;
             const int countElements = 3;
             Console.WriteLine("=================CREATE 2 LISTS===============");
-            CreateAndFillingLists(out Lists, countList, 
+            CreateAndFillingLists(out namedLists, countList, 
                                 new string[] { "СЭР", "САСДУ" }, countElements);
-            PrintList(new PersonList[] { Lists[0], Lists[1] });
+            PrintList(namedLists);
 
             Console.WriteLine("==============ADD PERSON -> 1 LIST============");
-            Lists[0].AddPerson(Person.GetRandomPerson());
-            PrintList(new PersonList[] { Lists[0] });
+            namedLists[0].List.AddPerson(Person.GetRandomPerson());
+            PrintList(new (PersonList List, string Name)[] { namedLists[0] });
 
             Console.WriteLine("=============COPY PERSON -> 2 LIST============");
-            Lists[1].AddPerson(Lists[0].GetByIndex(1));
-            PrintList(new PersonList[] { Lists[1] });
+            namedLists[1].List.AddPerson(namedLists[0].List.GetByIndex(1));
+            PrintList(new (PersonList List, string Name)[] { namedLists[1] });
 
             Console.WriteLine("==============DELETE FROM 1 LIST=============");
-            Lists[0].DeleteByIndex(1);
-            PrintList(new PersonList[] { Lists[0], Lists[1] });
+            namedLists[0].List.DeleteByIndex(1);
+            PrintList(namedLists);
 
             Console.WriteLine("==============CLEARE ALL 2 LIST===============");
-            Lists[1].DeleteAllPeople();
-            PrintList(new PersonList[] { Lists[0], Lists[1] });
+            namedLists[1].List.DeleteAllPeople();
+            PrintList(namedLists);
         }
 
         /// <summary>
@@ -163,7 +145,7 @@ namespace ConsoleApp1
         /// </summary>
         /// <param name="action">Обрабатываемое событие</param>
         /// <param name="inputMessage">Сообщение в консоль</param>
-        static void ActionHandler(Action action, string inputMessage)
+        public static void ActionHandler(Action action, string inputMessage)
         {
             while (true)
             {
@@ -188,114 +170,75 @@ namespace ConsoleApp1
             }
         }
 
-        //TODO: RSDN
         /// <summary>
-        /// Функция обработки чтения имени/фамилии
+        /// Процедура удаление человека из списка по индексу
         /// </summary>
-        /// <param name="parameter">Строка "Имя" или "Фамилия"</param>
-        /// <param name="languageContained">Список языков из которых состоит имя или фамилия</param>
-        /// <returns>Строка с именем/фамилией</returns>
-        static string ReadNames(string parameter, out List<string> languageContained)
+        /// <param name="NamedList">Список людей</param>
+        public static void DeletePersonByIndex((PersonList List, string Name) NamedList)
         {
-            Console.WriteLine($"{parameter} нового человека (кириллица или латиница):");
-            string name;
-            languageContained = new List<string>(); 
-            bool badData;
-            do
+            if (NamedList.List.CountOfPersons == 0)
             {
-                badData = false;
-                name = Console.ReadLine();
-                if (name == string.Empty)
-                {
-                    badData = true;
-                    Console.WriteLine("Введена пустая строка, повторите ввод");
-                    continue;
-                }
-                if (name.Any(char.IsNumber))
-                {
-                    badData = true;
-                    Console.WriteLine("В строке содержится(-атся) цифра(-ы), " +
-                                                        "повторите ввод без них");
-                    continue;
-                }
-                languageContained = CheckLanguage(name);
-                if (languageContained.Count > 1)
-                {
-                    badData = true;
-                    Console.WriteLine($"{parameter} содержит символы " +
-                                        $"нескольких алфавитов, повторите ввод");
-                    continue;
-                }
-            } while (badData);
-            
-            string normalizedName = NormalizationNames(name);
-            if (normalizedName != name)
-            {
-                Console.WriteLine($"Возможно вы ввели ошиблись при введении, " +
-                    $"не хотите изменить на \"{normalizedName}\"? (Y/N)");
-                string action = Console.ReadLine();
-                if (action == "Y")
-                {
-                    name = normalizedName;
-                }
+                Console.WriteLine("Лист пуст: нет людей для удаления");
+                return;
             }
-            return name;
-        }
-        
-        //TODO: RSDN
-        /// <summary>
-        /// Функция определения алфавита(-ов) символов в имени/фамилии
-        /// </summary>
-        /// <param name="name">Имя или фамилия</param>
-        /// <returns>Лист языков из которых состоит вводимая строка</returns>
-        static List<string> CheckLanguage(string name)
-        {
-            Dictionary<string, string> languagesDictionary 
-                                = new Dictionary<string, string>();
-            languagesDictionary.Add("Russian", @"[а-я]+");
-            languagesDictionary.Add("English", @"[a-z]+");
-
-            List<string> languageContained = new List<string>();
-            foreach (var language in languagesDictionary)
-            {
-                if (Regex.IsMatch(name.ToLower(), language.Value))
+            var actionsTuple = Tuple.Create<Action, string>
+            (
+                () =>
                 {
-                    languageContained.Add(language.Key);
-                }
-            }
-            return languageContained;
-        }
-
-        //TODO: RSDN
-        /// <summary>
-        /// Функция преобразования в "правильный" регистр
-        /// </summary>
-        /// <param name="name">Имя или фамилия</param>
-        /// <returns>Имя/Фамилия в "правильном" регистре</returns>
-        static string NormalizationNames(string name)
-        {
-            name = name.ToLower();
-            var symbols = new[] { "-", " " };
-            foreach (var symbol in symbols)
-            {
-                string buffer = "";
-                string[] nameParts = name.Split(symbol);
-                foreach (string part in nameParts)
-                {
-                    buffer += part.Substring(0,1).ToUpper() +
-                        part.Substring(1) + symbol;
-                }
-                buffer = buffer.Remove(buffer.Length - 1);
-                name = buffer;
-            }
-            return name;
+                    if (!int.TryParse(Console.ReadLine(), out int index))
+                    {
+                        throw new FormatException("Не удалось распознать номер");
+                    }
+                    if (index != -1)
+                    {
+                        NamedList.List.DeleteByIndex(index - 1);
+                    }
+                },
+                $"Введите номер человека в списке, которого необходимо удалить. \n" +
+                $"Чтобы вернуться назад введите \"-1\""
+            );
+            ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
         }
 
         /// <summary>
-        /// Процедура считывания, обработки данных и создания объекта Person
+        /// Процедура удаление человека из списка по имени и фамилии
         /// </summary>
-        /// <returns>Экземпляр класса Person</returns>
-        static Person CreatePerson()
+        /// <param name="NamedList">Список людей</param>
+        public static void DeletePersonByAnthroponym((PersonList List, string Name) NamedList)
+        {
+            if (NamedList.List.CountOfPersons == 0)
+            {
+                Console.WriteLine("Лист пуст: нет людей для удаления");
+                return;
+            }
+            (string FirstName, string SecondName) Anthroponym = ReadFirstSecondName();
+            Console.WriteLine(NamedList.List.DeletePersonByAnthroponym
+                                               (Anthroponym.FirstName, Anthroponym.SecondName)
+                                    ? $"Запись о человека \"{Anthroponym.FirstName}" +
+                                                         $" {Anthroponym.SecondName}\" удалена"
+                                    : $"Данных о введеном человеке не обнаружено");
+        }
+
+        /// <summary>
+        /// Процедура полной очистки листа
+        /// </summary>
+        /// <param name="NamedList">Список людей</param>
+        public static void ClearList((PersonList List, string Name) NamedList)
+        {
+            if (NamedList.List.CountOfPersons == 0)
+            {
+                Console.WriteLine("Лист пуст: нет людей для удаления");
+                return;
+            }
+            NamedList.List.DeleteAllPeople();
+            Console.WriteLine($"Список успешно очищен");
+        }
+
+        /// <summary>
+        /// Функция считывания имени и фамилии
+        /// </summary>
+        /// <returns>Кортеж из имени и фамилии</returns>
+        public static (string, string) ReadFirstSecondName()
         {
             string mySuperName = ReadNames("Имя", out var checkFirstName);
             string lastName = ReadNames("Фамилия", out var checkLastName);
@@ -318,7 +261,140 @@ namespace ConsoleApp1
                         break;
                 }
             }
+            return (mySuperName, lastName);
+        }
 
+        //TODO: RSDN | +
+        /// <summary>
+        /// Функция обработки чтения имени/фамилии
+        /// </summary>
+        /// <param name="parameter">Строка "Имя" или "Фамилия"</param>
+        /// <param name="languageContained">Список языков из которых состоит имя или фамилия</param>
+        /// <returns>Строка с именем/фамилией</returns>
+        public static string ReadNames(string parameter, out List<string> languageContained)
+        {
+            Console.WriteLine($"{parameter} человека (кириллица или латиница):");
+            string name;
+            languageContained = new List<string>(); 
+            bool badData;
+            do
+            {
+                badData = false;
+                name = Console.ReadLine();
+                if (name == string.Empty)
+                {
+                    badData = true;
+                    Console.WriteLine("Введена пустая строка, повторите ввод");
+                    continue;
+                }
+                if (name.Any(char.IsNumber))
+                {
+                    badData = true;
+                    Console.WriteLine("В строке содержится(-атся) цифра(-ы), " +
+                                                        "повторите ввод без них");
+                    continue;
+                }
+                badData = CheckCountOfNameLanguages(name, out languageContained);
+                if (badData)
+                {
+                    Console.WriteLine($"{parameter} содержит символы " +
+                                        $"нескольких алфавитов, повторите ввод");
+                    continue;
+                }
+            } while (badData);
+            return CheckNeedNormalization(name);
+        }
+
+        /// <summary>
+        /// Проверка на количество языков, из которых состоит имя/фамилия
+        /// </summary>
+        /// <param name="name">Имя или фамилия</param>
+        /// <param name="languageContained">Список языков из которых состоит имя или фамилия</param> 
+        /// <returns>True если имя/фамилия состоит из символов нескольких алфавитов</returns>
+        public static bool CheckCountOfNameLanguages(string name, out List<string> languageContained)
+        {
+            languageContained = CheckLanguage(name);
+            return languageContained.Count > 1;
+        }
+
+        //TODO: RSDN | +
+        /// <summary>
+        /// Функция определения алфавита(-ов) символов в имени/фамилии
+        /// </summary>
+        /// <param name="name">Имя или фамилия</param>
+        /// <returns>Лист языков из которых состоит вводимая строка</returns>
+        public static List<string> CheckLanguage(string name)
+        {
+            Dictionary<string, string> languagesDictionary
+                                = new Dictionary<string, string>();
+            languagesDictionary.Add("Russian", @"[а-я]+");
+            languagesDictionary.Add("English", @"[a-z]+");
+
+            List<string> languageContained = new List<string>();
+            foreach (var language in languagesDictionary)
+            {
+                if (Regex.IsMatch(name.ToLower(), language.Value))
+                {
+                    languageContained.Add(language.Key);
+                }
+            }
+            return languageContained;
+        }
+
+        /// <summary>
+        /// Проверка на необходимость нормализации имени/фамилии
+        /// </summary>
+        /// <param name="name">Имя или фамилия</param>
+        /// <returns>Строка с корректным именем или фамилией</returns>
+        public static string CheckNeedNormalization(string name)
+        {
+            string normalizedName = NormalizationNames(name);
+            if (normalizedName != name)
+            {
+                Console.WriteLine($"Возможно вы ввели ошиблись при введении, " +
+                    $"не хотите изменить на \"{normalizedName}\"? (Y/N)");
+                string action = Console.ReadLine();
+                if (action == "Y")
+                {
+                    name = normalizedName;
+                }
+            }
+            return name;
+        }
+
+        //TODO: RSDN | +
+        /// <summary>
+        /// Функция преобразования в "правильный" регистр
+        /// </summary>
+        /// <param name="name">Имя или фамилия</param>
+        /// <returns>Имя/Фамилия в "правильном" регистре</returns>
+        public static string NormalizationNames(string name)
+        {
+            name = name.ToLower();
+            var symbols = new[] { "-", " " };
+            foreach (var symbol in symbols)
+            {
+                string buffer = "";
+                string[] nameParts = name.Split(symbol);
+                foreach (string part in nameParts)
+                {
+                    buffer += part.Substring(0,1).ToUpper() +
+                        part.Substring(1) + symbol;
+                }
+                buffer = buffer.Remove(buffer.Length - 1);
+                name = buffer;
+            }
+            return name;
+        }
+
+        /// <summary>
+        /// Процедура считывания, обработки данных и создания объекта Person
+        /// </summary>
+        /// <returns>Экземпляр класса Person</returns>
+        public static Person CreatePerson()
+        {
+            
+            (string FirstName, string SecondName) Anthroponym = ReadFirstSecondName();
             int age = -1;
             var actionsTuple = Tuple.Create<Action, string>
             (
@@ -338,7 +414,6 @@ namespace ConsoleApp1
                 $"Введите возраст человека от 0 до {Person.AgeMax}"
             );
             ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
-            
 
             Gender gender = PossibleGender.Indefinite;
             actionsTuple = Tuple.Create<Action, string>
@@ -355,23 +430,24 @@ namespace ConsoleApp1
             );
             ActionHandler(actionsTuple.Item1, actionsTuple.Item2);
 
-            return new Person(mySuperName, lastName, age, (PossibleGender) gender);
+            return new Person(Anthroponym.FirstName, Anthroponym.SecondName,
+                                                age, (PossibleGender) gender);
         }
 
         /// <summary>
         /// Вывод в консоль содержимого листов
         /// </summary>
-        /// <param name="Lists">Листы для вывода в консоль</param>
-        /// //TODO: RSDN
-        static void PrintList(in PersonList[] Lists)  
+        /// <param name="namedLists">Проименованные листы для вывода в консоль</param>ля
+        /// //TODO: RSDN | +
+        public static void PrintList(in (PersonList List, string Name)[] namedLists)  
         {
-            //TODO: RSDN
-            foreach (var List in Lists)
+            //TODO: RSDN | +
+            foreach (var namedList in namedLists)
             {
-                Console.WriteLine(List.Name);
-                for (int i = 0; i < List.CountOfPersons; i++)
+                Console.WriteLine(namedList.Name + ":");
+                for (int j = 0; j < namedList.List.CountOfPersons; j++)
                 {
-                    Console.WriteLine($"{i + 1})" + List.GetByIndex(i).PersonInfo);
+                    Console.WriteLine($"{j + 1})" + namedList.List.GetByIndex(j).PersonInfo);
                 }
                 Console.WriteLine();
             }
@@ -381,24 +457,29 @@ namespace ConsoleApp1
         /// Создание нужного количества листов в массиве с 
         /// определенным количеством элементов внутри
         /// </summary>
-        /// //TODO: RSDN
-        /// <param name="Lists">Листы для создания и заполнения</param>
+        /// //TODO: RSDN | +
+        /// <param name="namedLists">Проименовынные листы для создания и заполнения</param>
         /// <param name="сountLists">Необходимое количество PersonList-ов</param>
         /// <param name="names">Названия для листов</param>
         /// <param name="сountElements">Количество элементов в листах</param>
-        static void CreateAndFillingLists(out PersonList[] Lists, int сountLists, 
+        public static void CreateAndFillingLists(out (PersonList List, string Name)[] namedLists, int сountLists, 
                                                 string[] names, int сountElements = 0)
         {
-            Lists = new PersonList[сountLists];
+            namedLists = new (PersonList List, string Name)[сountLists];
             for (int i = 0; i < сountLists; i++)
             {
-                Lists[i] = new PersonList
+                namedLists[i].List = new PersonList();
+                try
                 {
-                    Name = names[i]
-                };
+                    namedLists[i].Name = names[i];
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    namedLists[i].Name = "Indefinite name";
+                }
                 for (int j = 0; j < сountElements; j++)
                 {
-                    Lists[i].AddPerson(Person.GetRandomPerson());
+                    namedLists[i].List.AddPerson(Person.GetRandomPerson());
                 }
             }
         }
