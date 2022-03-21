@@ -8,8 +8,6 @@ namespace ClassLibrary1
     /// </summary>
     public class PersonList
     {
-        //TODO: | +
-
         /// <summary>
         /// Массив людей
         /// </summary>

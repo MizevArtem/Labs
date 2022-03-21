@@ -27,7 +27,6 @@ namespace ConsoleApp1
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
             
-            //TODO: RSDN | +
             (PersonList List, string Name)[] namedLists;
 
             string action;
@@ -111,8 +110,6 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура демонстрации функционала класса
         /// </summary>
-        /// //TODO: RSDN | +
-        /// //TODO: XML
         /// <param name="namedLists">Проименовыние листы для теста программы</param>
         public static void TestProgram(out (PersonList List, string Name)[] namedLists)
         {
@@ -263,8 +260,7 @@ namespace ConsoleApp1
             }
             return (mySuperName, lastName);
         }
-
-        //TODO: RSDN | +
+        
         /// <summary>
         /// Функция обработки чтения имени/фамилии
         /// </summary>
@@ -316,8 +312,7 @@ namespace ConsoleApp1
             languageContained = CheckLanguage(name);
             return languageContained.Count > 1;
         }
-
-        //TODO: RSDN | +
+        
         /// <summary>
         /// Функция определения алфавита(-ов) символов в имени/фамилии
         /// </summary>
@@ -361,8 +356,7 @@ namespace ConsoleApp1
             }
             return name;
         }
-
-        //TODO: RSDN | +
+        
         /// <summary>
         /// Функция преобразования в "правильный" регистр
         /// </summary>
@@ -393,7 +387,6 @@ namespace ConsoleApp1
         /// <returns>Экземпляр класса Person</returns>
         public static Person CreatePerson()
         {
-            
             (string FirstName, string SecondName) Anthroponym = ReadFirstSecondName();
             int age = -1;
             var actionsTuple = Tuple.Create<Action, string>
@@ -438,10 +431,8 @@ namespace ConsoleApp1
         /// Вывод в консоль содержимого листов
         /// </summary>
         /// <param name="namedLists">Проименованные листы для вывода в консоль</param>ля
-        /// //TODO: RSDN | +
         public static void PrintList(in (PersonList List, string Name)[] namedLists)  
         {
-            //TODO: RSDN | +
             foreach (var namedList in namedLists)
             {
                 Console.WriteLine(namedList.Name + ":");
@@ -457,7 +448,6 @@ namespace ConsoleApp1
         /// Создание нужного количества листов в массиве с 
         /// определенным количеством элементов внутри
         /// </summary>
-        /// //TODO: RSDN | +
         /// <param name="namedLists">Проименовынные листы для создания и заполнения</param>
         /// <param name="сountLists">Необходимое количество PersonList-ов</param>
         /// <param name="names">Названия для листов</param>
@@ -482,6 +472,7 @@ namespace ConsoleApp1
                     namedLists[i].List.AddPerson(Person.GetRandomPerson());
                 }
             }
+            //TODO: return
         }
     }
 }
