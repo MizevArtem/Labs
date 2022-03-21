@@ -19,6 +19,22 @@ namespace ConsoleApp1
         Exit
     }
 
+    /// <summary>
+    /// Структура объединяющая PersonList и его имя
+    /// </summary>
+    public struct NamedLists
+    {
+        /// <summary>
+        /// Имя листа
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Лист
+        /// </summary>
+        public PersonList List { get; set; }
+    }
+
     class Program
     {
        
@@ -26,8 +42,8 @@ namespace ConsoleApp1
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
-            
-            (PersonList List, string Name)[] namedLists;
+
+            NamedLists[] namedLists;
 
             string action;
             string exitAction = "exit";
@@ -44,7 +60,7 @@ namespace ConsoleApp1
                 //Ручная работа с PersonList
                 else if (action == "N") 
                 {
-                    CreateAndFillingLists(out namedLists, 1, new string[] { "Лист №1" });
+                    namedLists = CreateAndFillingLists(1, new string[] { "Лист №1" });
                     ListMenuItems actionList;
                     do
                     {
@@ -77,7 +93,7 @@ namespace ConsoleApp1
                             }
                             break;
                         case ListMenuItems.PrintList: 
-                            PrintList(new (PersonList List, string Name)[] { namedLists[0] });
+                            PrintList(new NamedLists[] { namedLists[0] });
                             break;
                         case ListMenuItems.DeletePersonByIndex:
                             DeletePersonByIndex(namedLists[0]);
@@ -91,7 +107,8 @@ namespace ConsoleApp1
                         case ListMenuItems.Exit:  
                             break;
                         default:  
-                            Console.WriteLine("Не удалось определить команду, повторите ввод...");
+                            Console.WriteLine("Не удалось определить команду, " +
+                                                            "повторите ввод...");
                             break;
                         }
                         Console.WriteLine();
@@ -110,23 +127,23 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура демонстрации функционала класса
         /// </summary>
-        /// <param name="namedLists">Проименовыние листы для теста программы</param>
-        public static void TestProgram(out (PersonList List, string Name)[] namedLists)
+        /// <param name="namedLists">Kисты для теста программы</param>
+        public static void TestProgram(out NamedLists[] namedLists)
         {
             const int countList = 2;
             const int countElements = 3;
             Console.WriteLine("=================CREATE 2 LISTS===============");
-            CreateAndFillingLists(out namedLists, countList, 
+            namedLists = CreateAndFillingLists( countList, 
                                 new string[] { "СЭР", "САСДУ" }, countElements);
             PrintList(namedLists);
 
             Console.WriteLine("==============ADD PERSON -> 1 LIST============");
             namedLists[0].List.AddPerson(Person.GetRandomPerson());
-            PrintList(new (PersonList List, string Name)[] { namedLists[0] });
+            PrintList(new NamedLists[] { namedLists[0] });
 
             Console.WriteLine("=============COPY PERSON -> 2 LIST============");
             namedLists[1].List.AddPerson(namedLists[0].List.GetByIndex(1));
-            PrintList(new (PersonList List, string Name)[] { namedLists[1] });
+            PrintList(new NamedLists[] { namedLists[1] });
 
             Console.WriteLine("==============DELETE FROM 1 LIST=============");
             namedLists[0].List.DeleteByIndex(1);
@@ -170,10 +187,10 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура удаление человека из списка по индексу
         /// </summary>
-        /// <param name="NamedList">Список людей</param>
-        public static void DeletePersonByIndex((PersonList List, string Name) NamedList)
+        /// <param name="namedList">Список людей</param>
+        public static void DeletePersonByIndex(NamedLists namedList)
         {
-            if (NamedList.List.CountOfPersons == 0)
+            if (namedList.List.CountOfPersons == 0)
             {
                 Console.WriteLine("Лист пуст: нет людей для удаления");
                 return;
@@ -188,7 +205,7 @@ namespace ConsoleApp1
                     }
                     if (index != -1)
                     {
-                        NamedList.List.DeleteByIndex(index - 1);
+                        namedList.List.DeleteByIndex(index - 1);
                     }
                 },
                 $"Введите номер человека в списке, которого необходимо удалить. \n" +
@@ -200,16 +217,16 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура удаление человека из списка по имени и фамилии
         /// </summary>
-        /// <param name="NamedList">Список людей</param>
-        public static void DeletePersonByAnthroponym((PersonList List, string Name) NamedList)
+        /// <param name="namedList">Список людей</param>
+        public static void DeletePersonByAnthroponym(NamedLists namedList)
         {
-            if (NamedList.List.CountOfPersons == 0)
+            if (namedList.List.CountOfPersons == 0)
             {
                 Console.WriteLine("Лист пуст: нет людей для удаления");
                 return;
             }
             (string FirstName, string SecondName) Anthroponym = ReadFirstSecondName();
-            Console.WriteLine(NamedList.List.DeletePersonByAnthroponym
+            Console.WriteLine(namedList.List.DeletePersonByAnthroponym
                                                (Anthroponym.FirstName, Anthroponym.SecondName)
                                     ? $"Запись о человека \"{Anthroponym.FirstName}" +
                                                          $" {Anthroponym.SecondName}\" удалена"
@@ -219,15 +236,15 @@ namespace ConsoleApp1
         /// <summary>
         /// Процедура полной очистки листа
         /// </summary>
-        /// <param name="NamedList">Список людей</param>
-        public static void ClearList((PersonList List, string Name) NamedList)
+        /// <param name="namedList">Список людей</param>
+        public static void ClearList(NamedLists namedList)
         {
-            if (NamedList.List.CountOfPersons == 0)
+            if (namedList.List.CountOfPersons == 0)
             {
                 Console.WriteLine("Лист пуст: нет людей для удаления");
                 return;
             }
-            NamedList.List.DeleteAllPeople();
+            namedList.List.DeleteAllPeople();
             Console.WriteLine($"Список успешно очищен");
         }
 
@@ -345,14 +362,31 @@ namespace ConsoleApp1
         {
             string normalizedName = NormalizationNames(name);
             if (normalizedName != name)
-            {
-                Console.WriteLine($"Возможно вы ввели ошиблись при введении, " +
-                    $"не хотите изменить на \"{normalizedName}\"? (Y/N)");
-                string action = Console.ReadLine();
-                if (action == "Y")
+            { 
+                do 
                 {
-                    name = normalizedName;
-                }
+                    Console.WriteLine($"Возможно вы  ошиблись при введении, " +
+                        $"не хотите изменить на \"{normalizedName}\"? (Y/N)");
+                    string action = Console.ReadLine();
+                    if (action == "Y")
+                    {
+                        Console.WriteLine($"\"{name}\" будет заменено на " +
+                                                    $"\"{normalizedName}\"");
+                        name = normalizedName;
+                        break;
+                    }
+                    else if (action == "N")
+                    {
+                        Console.WriteLine($"Будет оставлен введеный вариант:" +
+                                                               $" \"{name}\"");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Не удалось распознать команду. " +
+                                                          "Повторите ввод...");
+                    }
+                } while (true);
             }
             return name;
         }
@@ -431,7 +465,7 @@ namespace ConsoleApp1
         /// Вывод в консоль содержимого листов
         /// </summary>
         /// <param name="namedLists">Проименованные листы для вывода в консоль</param>ля
-        public static void PrintList(in (PersonList List, string Name)[] namedLists)  
+        public static void PrintList(in NamedLists[] namedLists)  
         {
             foreach (var namedList in namedLists)
             {
@@ -448,14 +482,14 @@ namespace ConsoleApp1
         /// Создание нужного количества листов в массиве с 
         /// определенным количеством элементов внутри
         /// </summary>
-        /// <param name="namedLists">Проименовынные листы для создания и заполнения</param>
         /// <param name="сountLists">Необходимое количество PersonList-ов</param>
         /// <param name="names">Названия для листов</param>
         /// <param name="сountElements">Количество элементов в листах</param>
-        public static void CreateAndFillingLists(out (PersonList List, string Name)[] namedLists, int сountLists, 
+        /// <returns>Заполненный случайными людьми лист </returns>
+        public static NamedLists[] CreateAndFillingLists(int сountLists, 
                                                 string[] names, int сountElements = 0)
         {
-            namedLists = new (PersonList List, string Name)[сountLists];
+            NamedLists[] namedLists = new NamedLists[сountLists];
             for (int i = 0; i < сountLists; i++)
             {
                 namedLists[i].List = new PersonList();
@@ -472,7 +506,8 @@ namespace ConsoleApp1
                     namedLists[i].List.AddPerson(Person.GetRandomPerson());
                 }
             }
-            //TODO: return
+            return namedLists;
+            //TODO: return | +
         }
     }
 }
