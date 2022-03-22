@@ -20,7 +20,7 @@ namespace ConsoleApp1
     }
 
     /// <summary>
-    /// Структура объединяющая PersonList и его имя
+    /// Структура объединяющая <see cref="PersonList"/> и его имя
     /// </summary>
     public struct NamedLists
     {
@@ -507,7 +507,6 @@ namespace ConsoleApp1
                 }
             }
             return namedLists;
-            //TODO: return | +
         }
     }
 }
