@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using ClassLibrary1;
+﻿using ClassLibrary1;
 MyRandom rnd = new MyRandom(System.DateTime.Now.Millisecond);
 PersonList personList = new PersonList();
 const int countElements = 15;
