@@ -23,7 +23,7 @@ namespace ConsoleApp2
                     personList.AddPerson(Child.GetRandomPerson());
                 }
             }
-            SortingList(ref personList);
+            FormationFamilies(ref personList);
             PrintList(personList);
             var person = personList.GetByIndex(3);
             switch (person)
@@ -74,31 +74,12 @@ namespace ConsoleApp2
         /// Распределение людей по семьям
         /// </summary>
         /// <param name="personList">выводимый лист</param>
-        static void SortingList(ref PersonList personList)
+        static void FormationFamilies(ref PersonList personList)
         {
             Random rnd = new Random();
-            PersonList mansList = new PersonList();
-            PersonList womansList = new PersonList();
-            PersonList childrensList = new PersonList();
-            for (int i = 0; i < personList.CountOfPersons; i++)
-            {
-                PersonBase person = personList.GetByIndex(i);
-                if (person is Adult)
-                {
-                    if (person.Gender == PossibleGender.Male)
-                    {
-                        mansList.AddPerson(person);
-                    }
-                    else
-                    {
-                        womansList.AddPerson(person);
-                    }
-                }
-                else
-                {
-                    childrensList.AddPerson(person);
-                }
-            }
+            SortingList(personList, 
+                out var mansList, out var womansList, out var childrensList);
+            
             int countMan = mansList.CountOfPersons;
             Adult husband = null;
             int countChildren = 0;
@@ -145,7 +126,40 @@ namespace ConsoleApp2
                     }
                 }
             }
+        }
 
+        /// <summary>
+        /// Распределение людей по группам
+        /// </summary>
+        /// <param name="personList">Распредяемые лист</param>
+        /// <param name="mansList">Лист мужчин</param>
+        /// <param name="womansList">Лист женщин</param>
+        /// <param name="childrensList">Лист детей</param>
+        static void SortingList(PersonList personList, 
+        out PersonList mansList, out PersonList womansList, out PersonList childrensList)
+        {
+            mansList = new PersonList();
+            womansList = new PersonList();
+            childrensList = new PersonList();
+            for (int i = 0; i < personList.CountOfPersons; i++)
+            {
+                PersonBase person = personList.GetByIndex(i);
+                if (person is Adult)
+                {
+                    if (person.Gender == PossibleGender.Male)
+                    {
+                        mansList.AddPerson(person);
+                    }
+                    else
+                    {
+                        womansList.AddPerson(person);
+                    }
+                }
+                else
+                {
+                    childrensList.AddPerson(person);
+                }
+            }
         }
     }
 }
