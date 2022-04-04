@@ -242,65 +242,6 @@ namespace ClassLibrary2
         }
 
         /// <summary>
-        /// Генерирует случайного человека заданного пола
-        /// </summary>
-        /// <param name="gender">Пол человека</param>
-        /// <returns>Полуслучайный человек</returns>
-        public static Adult GetRandomPerson(PossibleGender gender)
-        {
-            string[] maleNames =
-            {
-                "David", "James", "Charles", "Donald",
-                "William", "Lawrence", "Cody",
-                "John", "Kenneth", "Scott", "Samuel",
-                "Craig", "Willie", "Gregory", "Robert", "George"
-            };
-
-            string[] femaleNames =
-            {
-                "Frances", "Shannon", "Patricia", "Barbara",
-                "Hazel", "Roberta", "Gloria",
-                "Teresa", "Donna", "Violet", "Anna",
-                "Tracy", "Lois", "Carolyn", "Kimberly", "Virginia"
-            };
-
-            string[] allSurnames =
-            {
-                "Spencer", "Parker", "Butler", "Nelson",
-                "Daniels", "Miller", "Riley",
-                "Nelson", "Roberts", "Watts", "Lestrange",
-                "King", "Patrick", "Jenkins",
-                "Fisher", "Luna", "Collins", "Sanders",
-                "Wilson", "Gonzales", "Tran", "Morgan",
-            };
-
-            Random random = new Random(System.DateTime.Now.Millisecond);
-            string name;
-            switch (gender)
-            {
-                case PossibleGender.Male:
-                    name = maleNames[random.Next(maleNames.Length)];
-                    break;
-                case PossibleGender.Female:
-                    name = femaleNames[random.Next(femaleNames.Length)];
-                    break;
-                default:
-                    return new Adult("John", "Potter", 22,
-                        PossibleGender.Male, MaritalStatus.Single,
-                        1234, 123456);
-            }
-            string lastName = allSurnames[random.Next(allSurnames.Length)];
-            int age = random.Next(MarriageableAge, PersonBase.AgeMax);
-            int passportSeries = random.Next(_minSeries, _maxSeries);
-            int passportNumber = random.Next(_minNumber, _maxNumber);
-            string work = "Work №" + random.Next(1, 10);
-
-            return new Adult(name, lastName, age,
-                (PossibleGender)gender, MaritalStatus.Single,
-                passportSeries, passportNumber, work, null);
-        }
-
-        /// <summary>
         /// Получение информации о человеке
         /// </summary>
         /// <returns>Строка с информацией о человеке</returns>
