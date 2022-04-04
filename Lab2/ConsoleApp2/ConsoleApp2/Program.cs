@@ -13,14 +13,14 @@ namespace ConsoleApp2
             const int countElements = 15;
             for (int i = 0; i < countElements; i++)
             {
-                Thread.Sleep(1);
+                Thread.Sleep(5);
                 if (rnd.Next(false, true))
                 {
-                    personList.AddPerson(Adult.GetRandomPerson());
+                    personList.AddPerson(Adult.GetRandomPerson(rnd));
                 }
                 else
                 {
-                    personList.AddPerson(Child.GetRandomPerson());
+                    personList.AddPerson(Child.GetRandomPerson(rnd));
                 }
             }
             FormationFamilies(ref personList);
@@ -34,8 +34,8 @@ namespace ConsoleApp2
                     break;
                 case Child child:
                     (Adult Father, Adult Mother) = child.GetParents();
-                    PrintPerson("Father:", Father);
-                    PrintPerson("Mother:", Mother);
+                    PrintPerson("Father: ", Father);
+                    PrintPerson("Mother: ", Mother);
                     break;
             }
             Console.ReadLine();

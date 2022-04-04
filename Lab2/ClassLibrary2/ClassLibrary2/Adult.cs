@@ -186,7 +186,7 @@ namespace ClassLibrary2
         /// Генерирует случайного человека случайного пола
         /// </summary>
         /// <returns>Случайный человек</returns>
-        public static Adult GetRandomPerson()
+        public static Adult GetRandomPerson(Random rnd)
         {
             string[] maleNames =
             {
@@ -213,7 +213,7 @@ namespace ClassLibrary2
                 "Fisher", "Luna", "Collins", "Sanders",
                 "Wilson", "Gonzales", "Tran", "Morgan",
             };
-            Random rnd = new Random(System.DateTime.Now.Millisecond);
+            //Random rnd = new Random();
             PossibleGender gender = (PossibleGender)rnd.Next(1, 3);
             string name;
             switch (gender)

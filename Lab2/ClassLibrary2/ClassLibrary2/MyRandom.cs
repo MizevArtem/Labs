@@ -40,7 +40,7 @@ namespace ClassLibrary2
                 return false;
             }
 
-            Random rnd = new Random();
+            Random rnd = new Random(System.DateTime.Now.Millisecond);
             int randomInt = rnd.Next(0, 2);
 
             if (randomInt == 0)
@@ -51,7 +51,6 @@ namespace ClassLibrary2
             {
                 return true;
             }
-
 
         }
     }
