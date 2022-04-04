@@ -1,6 +1,7 @@
 ﻿using System;
 using ClassLibrary2;
 using System.Threading;
+
 namespace ConsoleApp2
 {
     public class Program
@@ -38,13 +39,12 @@ namespace ConsoleApp2
                     break;
             }
             Console.ReadLine();
-
         }
 
         /// <summary>
         /// Вывод на экран листа с людьми
         /// </summary>
-        /// <param name="personList">выводимый лист</param>
+        /// <param name="personList">Выводимый лист</param>
         static void PrintList(PersonList personList)
         {
             for (int i = 0; i < personList.CountOfPersons; i++)
@@ -53,6 +53,11 @@ namespace ConsoleApp2
             }
         }
 
+        /// <summary>
+        /// Вывод на экран информации о человеке
+        /// </summary>
+        /// <param name="prefix">Сообщение перед ифнормацией</param>
+        /// <param name="person">Человек для вывода его информации</param>
         static void PrintPerson(string prefix, PersonBase person)
         {
             if (person is null)
@@ -65,6 +70,10 @@ namespace ConsoleApp2
             }
         }
 
+        /// <summary>
+        /// Распределение людей по семьям
+        /// </summary>
+        /// <param name="personList">выводимый лист</param>
         static void SortingList(ref PersonList personList)
         {
             Random rnd = new Random();
