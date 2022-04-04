@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
+    //TODO: XML
     public class Adult : PersonBase
     {
         /// <summary>
@@ -247,24 +248,14 @@ namespace ClassLibrary2
         /// <returns>Строка с информацией о человеке</returns>
         public override string PersonInfo()
         {
-            string maritalStatus;
-            if (MaritalStatus == MaritalStatus.Married)
-            {
-                maritalStatus = $"Partner: {Partner.Name} {Partner.LastName}";
-            }
-            else
-            {
-                maritalStatus = MaritalStatus.ToString();
-            }
-            string work;
-            if (Work is null)
-            {
-                work = "Unemployed";
-            }
-            else
-            {
-                work = $"Work: {Work}";
-            }
+            var maritalStatus = MaritalStatus == MaritalStatus.Married 
+                ? $"Partner: {Partner.Name} {Partner.LastName}" 
+                : MaritalStatus.ToString();
+
+            var work = Work is null 
+                ? "Unemployed" 
+                : $"Work: {Work}";
+
             return $"{Name} {LastName}; Age: {Age}; Gender: {Gender};" +
                 $" {maritalStatus}; Passport series: {PassportSeries};" +
                 $" Passport number: {PassportNumber}; {work}";

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
+    //TODO: XML
     public class Child : PersonBase
     {
         /// <summary>
@@ -91,6 +92,7 @@ namespace ClassLibrary2
         /// <param name="gender">Ожидаемый пол родителя</param>
         public Adult GenderCheck(Adult parent, PossibleGender gender)
         {
+            //TODO:
             if (!(parent is null))
             {
                 if (parent.Gender != gender)

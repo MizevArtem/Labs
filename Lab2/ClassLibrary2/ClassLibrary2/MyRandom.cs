@@ -16,6 +16,7 @@ namespace ClassLibrary2
         /// </summary>
         public MyRandom() : base() { }
 
+        //TODO: RSDN
         /// <summary>
         /// Конструктор с параметром
         /// </summary>
@@ -31,6 +32,7 @@ namespace ClassLibrary2
         /// <returns>Случайное значение (bool) типа</returns> 
         public bool Next(bool lowerBound, bool upperBound)
         {
+            //TODO:
             if (lowerBound & upperBound)
             {
                 return true;
@@ -43,14 +45,7 @@ namespace ClassLibrary2
             Random rnd = new Random(System.DateTime.Now.Millisecond);
             int randomInt = rnd.Next(0, 2);
 
-            if (randomInt == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return randomInt != 0;
 
         }
     }

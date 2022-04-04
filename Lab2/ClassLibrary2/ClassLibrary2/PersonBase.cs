@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
+    //TODO: XML
     public abstract class PersonBase
     {
         /// <summary>
@@ -70,6 +71,7 @@ namespace ClassLibrary2
         /// </summary>
         public PossibleGender Gender { get; set; }
 
+        //TODO:
         /// <summary>
         /// Констукрутор класса
         /// </summary>
@@ -85,6 +87,7 @@ namespace ClassLibrary2
             Gender = gender;
         }
 
+        //TODO:
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
