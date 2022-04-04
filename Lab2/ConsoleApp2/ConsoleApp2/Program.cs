@@ -29,8 +29,7 @@ namespace ConsoleApp2
             switch (person)
             {
                 case Adult adult:
-                    Adult partner = adult.GetPartner();
-                    PrintPerson("Partner is ", partner);
+                    PrintPerson("Partner is ", adult.GetPartner());
                     break;
                 case Child child:
                     (Adult Father, Adult Mother) = child.GetParents();
