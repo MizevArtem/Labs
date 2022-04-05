@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
-    //TODO: XML
+    //TODO: XML | +
+    /// <summary>
+    /// Абстрактный класс человека.
+    /// </summary>
     public abstract class PersonBase
     {
         /// <summary>
@@ -28,6 +31,11 @@ namespace ClassLibrary2
         /// Минимально допустимый возраст 
         /// </summary>
         public const int AgeMin = 0;
+
+        /// <summary>
+        /// Брачный возраст
+        /// </summary>
+        public const int MarriageableAge = 16;
 
         /// <summary>
         /// Метод для работы с именем 
@@ -71,7 +79,7 @@ namespace ClassLibrary2
         /// </summary>
         public PossibleGender Gender { get; set; }
 
-        //TODO:
+        //TODO: | +
         /// <summary>
         /// Констукрутор класса
         /// </summary>
@@ -79,7 +87,7 @@ namespace ClassLibrary2
         /// <param name="lastName">Фамилия человека</param>
         /// <param name="age">Возраст человека</param>
         /// <param name="gender">Пол человека</param>
-        public PersonBase(string name, string lastName, int age, PossibleGender gender)
+        protected PersonBase(string name, string lastName, int age, PossibleGender gender)
         {
             Name = name;
             LastName = lastName;
@@ -87,11 +95,11 @@ namespace ClassLibrary2
             Gender = gender;
         }
 
-        //TODO:
+        //TODO: | +
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public PersonBase() : this("Dab", "Bergnight", 23, PossibleGender.Male) { }
+        protected PersonBase() : this("Dab", "Bergnight", 23, PossibleGender.Male) { }
 
         /// <summary>
         /// Проверка формата имени и фамилии

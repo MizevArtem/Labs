@@ -16,13 +16,13 @@ namespace ClassLibrary2
         /// </summary>
         public MyRandom() : base() { }
 
-        //TODO: RSDN
+        //TODO: RSDN | +
         /// <summary>
         /// Конструктор с параметром
         /// </summary>
-        /// /// <param name="Seed">Число, используемое для вычисления
+        /// /// <param name="seed">Число, используемое для вычисления
         /// начального значения последовательности псевдослучайных чисел.</param>
-        public MyRandom(int Seed) : base(Seed) { }
+        public MyRandom(int seed) : base(seed) { }
 
         /// <summary>
         /// Получение следующего псведослучайного значения
@@ -32,21 +32,16 @@ namespace ClassLibrary2
         /// <returns>Случайное значение (bool) типа</returns> 
         public bool Next(bool lowerBound, bool upperBound)
         {
-            //TODO:
+            //TODO: | +
             if (lowerBound & upperBound)
             {
                 return true;
             }
-            else if (!lowerBound & !upperBound)
+            else if (!(lowerBound | upperBound))
             {
                 return false;
             }
-
-            Random rnd = new Random(System.DateTime.Now.Millisecond);
-            int randomInt = rnd.Next(0, 2);
-
-            return randomInt != 0;
-
+            return new Random().Next(0, 2) != 0;
         }
     }
 }

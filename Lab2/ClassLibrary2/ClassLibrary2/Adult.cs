@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
-    //TODO: XML
+    //TODO: XML | +
+    /// <summary>
+    /// Класс взрослого человека.
+    /// Включает в себя информацию о имене, фамилии, 
+    /// паспортные данные и ссылку на партнера и др.
+    /// </summary>
     public class Adult : PersonBase
     {
         /// <summary>
         /// Возраст
         /// </summary>
         private int _age;
-
-        /// <summary>
-        /// Брачный возраст
-        /// </summary>
-        public const int MarriageableAge = 16;
 
         /// <summary>
         /// Метод для работы с возрастом 
@@ -42,7 +42,7 @@ namespace ClassLibrary2
         /// <summary>
         /// Статус человека в семейном плане
         /// </summary>
-        public MaritalStatus MaritalStatus { get; set; }
+        public MaritalStatus MaritalStatus { get; private set; }
 
         /// <summary>
         /// Серия паспорта
@@ -127,27 +127,8 @@ namespace ClassLibrary2
             {
                 if (!(value is null))
                 {
-                    if (Gender == value.Gender)
-                    {
-                        throw new ArgumentException
-                            ("Пока что однополые браки запрещены." +
-                            "Выберите персону противоположного пола!");
-                    }
-                    if (MaritalStatus != MaritalStatus.Married)
-                    {
-                        throw new ArgumentException
-                            ("Не соответствие семейного статуса" +
-                            " и наличия партнера");
-                    }
-                }
-                else
-                {
-                    if (MaritalStatus == MaritalStatus.Married)
-                    {
-                        throw new ArgumentException
-                            ("Не соответствие семейного статуса" +
-                            " и наличия партнера");
-                    }
+                    GenderCheck(value, Gender);
+                    MaritalStatus = MaritalStatus.Married;
                 }
                 _partner = value;
             }
@@ -181,6 +162,21 @@ namespace ClassLibrary2
             MaritalStatus = maritalStatus;
             Work = work;
             Partner = person;
+        }
+
+        /// <summary>
+        /// Проверка пола партнера
+        /// </summary>
+        /// <param name="partner">Ссылка на партнера</param>
+        /// <param name="gender">Недопустимый пол партнера</param>
+        public void GenderCheck(Adult partner, PossibleGender gender)
+        {
+            if (partner.Gender == gender)
+            {
+                throw new ArgumentException
+                            ("Пока что однополые браки запрещены." +
+                            "Выберите персону противоположного пола!");
+            }
         }
 
         /// <summary>

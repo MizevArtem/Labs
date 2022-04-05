@@ -79,10 +79,9 @@ namespace ConsoleApp2
             SortingList(personList, 
                 out var mansList, out var womansList, out var childrensList);
             
-            int countMan = mansList.CountOfPersons;
             Adult husband = null;
             int countChildren = 0;
-            for (int i = 0; i < countMan; i++)
+            for (int i = 0; i < mansList.CountOfPersons; i++)
             {
                 int countWomans = womansList.CountOfPersons;
                 countChildren = childrensList.CountOfPersons;
@@ -92,9 +91,7 @@ namespace ConsoleApp2
                 {
                     int nextWoman = rnd.Next(0, countWomans);
                     wife = womansList.GetByIndex(nextWoman) as Adult;
-                    husband.MaritalStatus = MaritalStatus.Married;
                     husband.Partner = wife;
-                    wife.MaritalStatus = MaritalStatus.Married;
                     wife.Partner = husband;
                     womansList.DeleteByIndex(nextWoman);
                 }
@@ -113,16 +110,13 @@ namespace ConsoleApp2
                     countChildren = childrensList.CountOfPersons;
                 }
             }
-            if (countChildren > 0)
+            for (int i = 0; i < countChildren; i++)
             {
-                for (int i = 0; i < countChildren; i++)
+                Child child = childrensList.GetByIndex(i) as Child;
+                child.Father = husband;
+                if (!(husband.Partner is null))
                 {
-                    Child child = childrensList.GetByIndex(i) as Child;
-                    child.Father = husband;
-                    if (!(husband.Partner is null))
-                    {
-                        child.Mother = husband.Partner;
-                    }
+                    child.Mother = husband.Partner;
                 }
             }
         }

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
-    //TODO: XML
+    //TODO: XML | +
+    /// <summary>
+    /// Класс ребенка.
+    /// Включает в себя информацию о имене, фамилии, 
+    /// учебном заведении и ссылки на родителей и др.
+    /// </summary>
     public class Child : PersonBase
     {
         /// <summary>
@@ -44,7 +49,11 @@ namespace ClassLibrary2
         public Adult Mother
         {
             get => _mother;
-            set => _mother = GenderCheck(value, PossibleGender.Female);
+            set
+            {
+                GenderCheck(value, PossibleGender.Female);
+                _mother = value;
+            }
         }
 
         /// <summary>
@@ -58,7 +67,12 @@ namespace ClassLibrary2
         public Adult Father
         {
             get => _father;
-            set => _father = GenderCheck(value, PossibleGender.Male);
+            set
+            { 
+                GenderCheck(value, PossibleGender.Male);
+                _father = value;
+            }
+            
         }
 
         /// <summary>
@@ -90,18 +104,14 @@ namespace ClassLibrary2
         /// </summary>
         /// <param name="parent">Ссылка на родителя</param>
         /// <param name="gender">Ожидаемый пол родителя</param>
-        public Adult GenderCheck(Adult parent, PossibleGender gender)
+        public void GenderCheck(Adult parent, PossibleGender gender)
         {
-            //TODO:
-            if (!(parent is null))
+            //TODO: | +
+            if (!(parent is null) && parent.Gender != gender)
             {
-                if (parent.Gender != gender)
-                {
-                    throw new ArgumentException
-                                      ("Родитель имеет неверный гендер");
-                }
+                throw new ArgumentException
+                                  ("Родитель имеет неверный гендер");
             }
-            return parent;
         }
 
         /// <summary>
