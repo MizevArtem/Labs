@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
-    //TODO: XML | +
     /// <summary>
     /// Класс взрослого человека.
     /// Включает в себя информацию о имене, фамилии, 

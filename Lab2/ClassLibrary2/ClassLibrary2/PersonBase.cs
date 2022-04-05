@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
-    //TODO: XML | +
     /// <summary>
     /// Абстрактный класс человека.
     /// </summary>
@@ -78,8 +77,7 @@ namespace ClassLibrary2
         /// Метод для работы с полом 
         /// </summary>
         public PossibleGender Gender { get; set; }
-
-        //TODO: | +
+        
         /// <summary>
         /// Констукрутор класса
         /// </summary>
@@ -94,8 +92,7 @@ namespace ClassLibrary2
             Age = age;
             Gender = gender;
         }
-
-        //TODO: | +
+        
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>

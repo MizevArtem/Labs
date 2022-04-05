@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary2
 {
-    //TODO: XML | +
     /// <summary>
     /// Класс ребенка.
     /// Включает в себя информацию о имене, фамилии, 
@@ -106,7 +105,6 @@ namespace ClassLibrary2
         /// <param name="gender">Ожидаемый пол родителя</param>
         public void GenderCheck(Adult parent, PossibleGender gender)
         {
-            //TODO: | +
             if (!(parent is null) && parent.Gender != gender)
             {
                 throw new ArgumentException

@@ -15,8 +15,7 @@ namespace ClassLibrary2
         /// Коструктор без параметров
         /// </summary>
         public MyRandom() : base() { }
-
-        //TODO: RSDN | +
+        
         /// <summary>
         /// Конструктор с параметром
         /// </summary>
@@ -32,7 +31,6 @@ namespace ClassLibrary2
         /// <returns>Случайное значение (bool) типа</returns> 
         public bool Next(bool lowerBound, bool upperBound)
         {
-            //TODO: | +
             if (lowerBound & upperBound)
             {
                 return true;
