@@ -4,6 +4,7 @@ namespace ClassLibrary3
 {
     public class OscillatoryMotion : MovementBase
     {
+        //TODO: проверки?
         /// <summary>
         /// Ускорение объекта
         /// </summary>

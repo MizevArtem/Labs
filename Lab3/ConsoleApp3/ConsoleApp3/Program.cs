@@ -4,11 +4,14 @@ using ClassLibrary3;
 
 namespace ConsoleApp3
 {
+    //TODO: XML
     internal class Program
     {
+        //TODO: XML
         static void Main(string[] args)
         {
-
+            //TODO: добаввить строки для корректного вывода
+            //TODO: RSDN
             List<MovementBase> Movements = new List<MovementBase>()
             {
                new UniformMovement(15, 25),
