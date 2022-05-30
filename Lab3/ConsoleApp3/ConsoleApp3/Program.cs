@@ -18,7 +18,7 @@ namespace ConsoleApp3
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             Console.InputEncoding = System.Text.Encoding.Unicode;
             
-            List<MovementBase> movements = new List<MovementBase>()
+            var movements = new List<MovementBase>()
             {
                new UniformMovement(15, 25),
                new UniformMovement(15),
@@ -30,12 +30,10 @@ namespace ConsoleApp3
             for (int t = 0; t < 150; t += 5)
             {
                 Console.WriteLine($"Момент времени t={t}");
-                int i = 0;
-                //TODO:
-                foreach (var Movement in movements)
+                //TODO: | +
+                for (int i = 0; i < movements.Count; i++)
                 {
-                    i++;
-                    Console.WriteLine($"{i}) " + Movement.PositionCalculation(t));
+                    Console.WriteLine($"{i}) " + movements[i].PositionCalculation(t));
                 }
             }
             Console.ReadLine();

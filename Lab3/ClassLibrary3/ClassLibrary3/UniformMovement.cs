@@ -20,14 +20,8 @@ namespace ClassLibrary3
             get { return _speed; }
             set
             {
-                if (value <= Math.Abs(MaxSpeed))
-                {
-                    _speed = value;
-                }
-                else
-                {
-                    throw new Exception($"Скорость не должна превышать {MaxSpeed} м/с.");
-                }
+                CheckArgumnet("Скорость", value, -MaxSpeed, MaxSpeed);
+                _speed = value;
             }
         }
 

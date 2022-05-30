@@ -1,4 +1,6 @@
-﻿namespace ClassLibrary3
+﻿using System;
+
+namespace ClassLibrary3
 {
     /// <summary>
     /// Базовый клас для всех видов движения
@@ -35,6 +37,26 @@
         /// <param name="time">Момент времени</param>
         public abstract double PositionCalculation(double time);
 
-
+        /// <summary>
+        /// Функция проверки параметра на допустимость значения
+        /// </summary>
+        /// <param name="param">Наименование параметра</param>
+        /// <param name="value">Значние параметра</param>
+        /// <param name="minValue">Наименьшее допустимое значение параметра</param>
+        /// <param name="maxValue">Наибольшее допустимое значение параметра</param>
+        public void CheckArgumnet(string param, double value,
+            double minValue = double.MinValue, double maxValue = double.MaxValue)
+        {
+            if (value < minValue)
+            {
+                throw new ArgumentException($"Параметр \"{param}\" не должен " +
+                                                    $"быть меньше {minValue}");
+            }
+            if (value > maxValue)
+            {
+                throw new ArgumentException($"Параметр \"{param}\" не должен " +
+                                                    $"быть больше {maxValue}");
+            }
+        }
     }
 }

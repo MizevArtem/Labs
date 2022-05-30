@@ -19,17 +19,10 @@ namespace ClassLibrary3
         {
             get { return _amplitude; }
             set
-            { 
+            {
                 //TODO: duplication
-                if (value<0)
-                {
-                    throw new ArgumentException("Амлитуда не должна " +
-                                                    "быть отрицательной");
-                }
-                else
-                {
-                    _amplitude = value;
-                }
+                CheckArgumnet("Амплитуда", value, 0);
+                _amplitude = value;
             }
         }
 
@@ -47,15 +40,8 @@ namespace ClassLibrary3
             set
             {
                 //TODO: duplication
-                if (value < 0)
-                {
-                    throw new ArgumentException("Циклическая частота должна " +
-                                                    "быть не отрицательной");
-                }
-                else
-                {
-                    _cyclicFrequency = value;
-                }
+                CheckArgumnet("Циклическая частота", value, 0);
+                _cyclicFrequency = value;
             }
         }
 
@@ -84,6 +70,6 @@ namespace ClassLibrary3
         public override double PositionCalculation(double time)
         {
             return StartPosition + Amplitude * Math.Sin(CyclicFrequency * time);
-        }
+        }   
     }
 }
