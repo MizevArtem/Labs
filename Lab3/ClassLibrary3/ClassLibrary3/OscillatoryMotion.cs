@@ -2,18 +2,61 @@
 
 namespace ClassLibrary3
 {
+    /// <summary>
+    /// Класс колебательного движения
+    /// </summary>
     public class OscillatoryMotion : MovementBase
     {
-        //TODO: проверки?
+        //TODO: проверки? | +
         /// <summary>
-        /// Ускорение объекта
+        /// Амплитуда колебаний
         /// </summary>
-        public double Amplitude { get; set; }
+        private double _amplitude;
+
+        /// <summary>
+        /// Метод для работы с амлитудой колебаний
+        /// </summary>
+        public double Amplitude 
+        {
+            get { return _amplitude; }
+            set
+            { 
+                if (value<0)
+                {
+                    throw new ArgumentException("Амлитуда не должна " +
+                                                    "быть отрицательной");
+                }
+                else
+                {
+                    _amplitude = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Циклическая частота
         /// </summary>
-        public double CyclicFrequency { get; set; }
+        private double _cyclicFrequency;
+
+        /// <summary>
+        ///Метод для работы с циклической частотой
+        /// </summary>
+        public double CyclicFrequency
+        {
+            get { return _cyclicFrequency; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Циклическая частота должна " +
+                                                    "быть не отрицательной");
+                }
+                else
+                {
+                    _cyclicFrequency = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Конструктор колебательного движения

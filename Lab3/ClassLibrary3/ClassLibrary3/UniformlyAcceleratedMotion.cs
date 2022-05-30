@@ -2,7 +2,10 @@
 
 namespace ClassLibrary3
 {
-    //TODO: XML
+    //TODO: XML | +
+    /// <summary>
+    /// Класс равноускоренного движения
+    /// </summary>
     public class UniformlyAcceleratedMotion : UniformMovement
     {
         /// <summary>
