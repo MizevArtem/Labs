@@ -20,7 +20,6 @@ namespace ClassLibrary3
             get { return _amplitude; }
             set
             {
-                //TODO: duplication
                 CheckArgumnet("Амплитуда", value, 0);
                 _amplitude = value;
             }
@@ -39,7 +38,6 @@ namespace ClassLibrary3
             get { return _cyclicFrequency; }
             set
             {
-                //TODO: duplication
                 CheckArgumnet("Циклическая частота", value, 0);
                 _cyclicFrequency = value;
             }

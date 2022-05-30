@@ -30,7 +30,6 @@ namespace ConsoleApp3
             for (int t = 0; t < 150; t += 5)
             {
                 Console.WriteLine($"Момент времени t={t}");
-                //TODO: | +
                 for (int i = 0; i < movements.Count; i++)
                 {
                     Console.WriteLine($"{i}) " + movements[i].PositionCalculation(t));
