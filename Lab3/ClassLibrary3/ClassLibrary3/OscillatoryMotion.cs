@@ -7,7 +7,6 @@ namespace ClassLibrary3
     /// </summary>
     public class OscillatoryMotion : MovementBase
     {
-        //TODO: проверки? | +
         /// <summary>
         /// Амплитуда колебаний
         /// </summary>
@@ -21,6 +20,7 @@ namespace ClassLibrary3
             get { return _amplitude; }
             set
             { 
+                //TODO: duplication
                 if (value<0)
                 {
                     throw new ArgumentException("Амлитуда не должна " +
@@ -46,6 +46,7 @@ namespace ClassLibrary3
             get { return _cyclicFrequency; }
             set
             {
+                //TODO: duplication
                 if (value < 0)
                 {
                     throw new ArgumentException("Циклическая частота должна " +

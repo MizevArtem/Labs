@@ -2,7 +2,6 @@
 
 namespace ClassLibrary3
 {
-    //TODO: XML | +
     /// <summary>
     /// Класс равноускоренного движения
     /// </summary>
