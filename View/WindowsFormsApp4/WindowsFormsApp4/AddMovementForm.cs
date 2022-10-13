@@ -221,5 +221,10 @@ namespace WindowsFormsApp4
         {
 
         }
+
+        private void randomButton_Click(object sender, EventArgs e)
+        {
+            //Тут будет код
+        }
     }
 }
