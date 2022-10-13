@@ -54,24 +54,24 @@ namespace ClassLibrary3
         /// Вычисления координаты объекты в заданный момент времени
         /// </summary>
         /// /// <param name="time">Момент времени</param>
-        public override double PositionCalculation(double time)
+        public override double PositionCalculation()
         {
             if (Acceleration == 0)
             {
-                return base.PositionCalculation(2);
+                return base.PositionCalculation();
             }
             //Если скорость света не была достигнута
-            if (Math.Abs(Speed + Acceleration * time) <= MaxSpeed)
+            if (Math.Abs(Speed + Acceleration * Time) <= MaxSpeed)
             {
-                return StartPosition + Speed * time +
-                    Acceleration * Math.Pow(time, 2) / 2;
+                return StartPosition + Speed * Time +
+                    Acceleration * Math.Pow(Time, 2) / 2;
             }
             //Время через которое будет достигнута скорость света
             double timeOfMaxSpeed = (MaxSpeed - Math.Abs(Speed)) / Acceleration;
             //Расстояние пройденное к моменту достижения скороcти света
             double positionByMaxSpeed = StartPosition + Speed * timeOfMaxSpeed +
                     Acceleration * Math.Pow(timeOfMaxSpeed, 2) / 2;
-            return positionByMaxSpeed + MaxSpeed * (time - timeOfMaxSpeed);
+            return positionByMaxSpeed + MaxSpeed * (Time - timeOfMaxSpeed);
         }
 
 

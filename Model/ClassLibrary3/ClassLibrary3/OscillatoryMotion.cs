@@ -64,10 +64,9 @@ namespace ClassLibrary3
         /// <summary>
         /// Вычисления координаты объекты в заданный момент времени
         /// </summary>
-        /// /// <param name="time">Момент времени</param>
-        public override double PositionCalculation(double time)
+        public override double PositionCalculation()
         {
-            return StartPosition + Amplitude * Math.Sin(CyclicFrequency * time);
+            return StartPosition + Amplitude * Math.Sin(CyclicFrequency * Time);
         }   
     }
 }
