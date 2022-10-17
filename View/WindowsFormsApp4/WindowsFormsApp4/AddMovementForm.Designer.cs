@@ -114,6 +114,8 @@
             // 
             // randomButton
             // 
+            this.randomButton.BackgroundImage = global::WindowsFormsApp4.Properties.Resources.GameDesign;
+            this.randomButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.randomButton.Location = new System.Drawing.Point(249, 290);
             this.randomButton.Name = "randomButton";
             this.randomButton.Size = new System.Drawing.Size(26, 23);
