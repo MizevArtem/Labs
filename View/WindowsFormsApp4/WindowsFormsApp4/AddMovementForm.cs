@@ -222,16 +222,23 @@ namespace WindowsFormsApp4
 
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки для создания случайного движения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RandomButton_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
             int selectTypeMovement = rand.Next(0, comboBox1.Items.Count);
             comboBox1.Text = comboBox1.Items[selectTypeMovement].ToString();
 
-            List<string> parametersThatMustBeGreaterThanZero = new List<string>();
-            parametersThatMustBeGreaterThanZero.Add("Time");
-            parametersThatMustBeGreaterThanZero.Add("Amplitude");
-            parametersThatMustBeGreaterThanZero.Add("CyclicFrequency");
+            List<string> parametersThatMustBeGreaterThanZero = new List<string>
+            {
+                "Time",
+                "Amplitude",
+                "CyclicFrequency"
+            };
 
             foreach (Control control in groupBox1.Controls)
             {
@@ -239,7 +246,7 @@ namespace WindowsFormsApp4
                 {
                     continue;
                 }
-                if (parametersThatMustBeGreaterThanZero.Any((w) => control.Name.Contains(w)))
+                if (parametersThatMustBeGreaterThanZero.Any((word) => control.Name.Contains(word)))
                 {
                     control.Text = rand.Next(1, 64).ToString();
                     continue;
