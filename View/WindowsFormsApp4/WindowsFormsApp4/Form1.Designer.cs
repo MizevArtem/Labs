@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp4
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -30,6 +30,10 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeMovement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndCoordinate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,10 +45,6 @@
             this.addButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeMovement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndCoordinate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -76,6 +76,30 @@
             this.dataGridView1.Size = new System.Drawing.Size(465, 207);
             this.dataGridView1.TabIndex = 0;
             // 
+            // Number
+            // 
+            this.Number.HeaderText = "№";
+            this.Number.Name = "Number";
+            this.Number.Width = 30;
+            // 
+            // TypeMovement
+            // 
+            this.TypeMovement.HeaderText = "Тип движения";
+            this.TypeMovement.Name = "TypeMovement";
+            this.TypeMovement.Width = 200;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Время";
+            this.Time.Name = "Time";
+            this.Time.Width = 70;
+            // 
+            // EndCoordinate
+            // 
+            this.EndCoordinate.HeaderText = "Координата";
+            this.EndCoordinate.Name = "EndCoordinate";
+            this.EndCoordinate.Width = 70;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -85,6 +109,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(505, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -164,41 +189,19 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Number
-            // 
-            this.Number.HeaderText = "№";
-            this.Number.Name = "Number";
-            this.Number.Width = 30;
-            // 
-            // TypeMovement
-            // 
-            this.TypeMovement.HeaderText = "Тип движения";
-            this.TypeMovement.Name = "TypeMovement";
-            this.TypeMovement.Width = 200;
-            // 
-            // Time
-            // 
-            this.Time.HeaderText = "Время";
-            this.Time.Name = "Time";
-            this.Time.Width = 70;
-            // 
-            // EndCoordinate
-            // 
-            this.EndCoordinate.HeaderText = "Координата";
-            this.EndCoordinate.Name = "EndCoordinate";
-            this.EndCoordinate.Width = 70;
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(505, 318);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "Main Form";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

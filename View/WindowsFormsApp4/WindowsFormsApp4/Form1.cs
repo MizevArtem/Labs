@@ -5,12 +5,12 @@ using ClassLibrary3;
 
 namespace WindowsFormsApp4
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
 
         private List<MovementBase> MovementList = new List<MovementBase>();
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -71,6 +71,11 @@ namespace WindowsFormsApp4
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

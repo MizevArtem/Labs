@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using ClassLibrary3;
-
+using System.Collections.Generic;
 
 namespace WindowsFormsApp4
 {
@@ -222,9 +222,30 @@ namespace WindowsFormsApp4
 
         }
 
-        private void randomButton_Click(object sender, EventArgs e)
+        private void RandomButton_Click(object sender, EventArgs e)
         {
-            //Тут будет код
+            Random rand = new Random();
+            int selectTypeMovement = rand.Next(0, comboBox1.Items.Count);
+            comboBox1.Text = comboBox1.Items[selectTypeMovement].ToString();
+
+            List<string> parametersThatMustBeGreaterThanZero = new List<string>();
+            parametersThatMustBeGreaterThanZero.Add("Time");
+            parametersThatMustBeGreaterThanZero.Add("Amplitude");
+            parametersThatMustBeGreaterThanZero.Add("CyclicFrequency");
+
+            foreach (Control control in groupBox1.Controls)
+            {
+                if (control is Label)
+                {
+                    continue;
+                }
+                if (parametersThatMustBeGreaterThanZero.Any((w) => control.Name.Contains(w)))
+                {
+                    control.Text = rand.Next(1, 64).ToString();
+                    continue;
+                }
+                control.Text = rand.Next(-100, 100).ToString();
+            }
         }
     }
 }

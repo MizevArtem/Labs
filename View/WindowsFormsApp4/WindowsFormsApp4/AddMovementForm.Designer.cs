@@ -119,12 +119,13 @@
             this.randomButton.Size = new System.Drawing.Size(26, 23);
             this.randomButton.TabIndex = 5;
             this.randomButton.UseVisualStyleBackColor = true;
-            this.randomButton.Click += new System.EventHandler(this.randomButton_Click);
+            this.randomButton.Click += new System.EventHandler(this.RandomButton_Click);
             // 
             // AddMovementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(311, 331);
             this.Controls.Add(this.randomButton);
             this.Controls.Add(this.cancelButton);
@@ -132,6 +133,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddMovementForm";
             this.Text = "Form2";
             this.groupBox1.ResumeLayout(false);
