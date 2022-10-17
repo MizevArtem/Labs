@@ -30,6 +30,7 @@ namespace WindowsFormsApp4
             UniformlyAcceleratedMotion,
             OscillatoryMotion
         }
+
         /// <summary>
         /// Конструктор формы
         /// </summary>
@@ -75,16 +76,11 @@ namespace WindowsFormsApp4
             }
             catch (Exception exception)
             {
-                if (exception.InnerException is null)
-                {
-                    MessageBox.Show(exception.Message, "Ошибка", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show(exception.InnerException.Message, "Ошибка", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
+                MessageBox.Show(exception.InnerException is null 
+                        ? exception.Message 
+                        : exception.InnerException.Message,
+                    "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
         }
@@ -124,9 +120,11 @@ namespace WindowsFormsApp4
         /// выбранный тип движения</param>
         private void CreateFields(PropertyInfo[] properties)
         {
+            //TODO:
             int y = 65;
             foreach (PropertyInfo field in properties)
             {
+                //TODO: строковй ключ
                 if (field.Name != "Time")
                 {
                     CreateLabels(field, y);
@@ -146,6 +144,7 @@ namespace WindowsFormsApp4
             Label label = new Label();
             switch(field.Name)
             {
+                //TODO: строковй ключ
                 case "StartPosition":
                     label.Text = "Начальное положение, м";
                     break;
@@ -233,9 +232,10 @@ namespace WindowsFormsApp4
             int selectTypeMovement = rand.Next(0, comboBox1.Items.Count);
             comboBox1.Text = comboBox1.Items[selectTypeMovement].ToString();
 
+            //TODO: строковй ключ
             List<string> parametersThatMustBeGreaterThanZero = new List<string>
             {
-                "Time",
+                nameof(MovementBase.Time),
                 "Amplitude",
                 "CyclicFrequency"
             };
@@ -246,6 +246,7 @@ namespace WindowsFormsApp4
                 {
                     continue;
                 }
+                //TODO:
                 if (parametersThatMustBeGreaterThanZero.Any((word) => control.Name.Contains(word)))
                 {
                     control.Text = rand.Next(1, 64).ToString();

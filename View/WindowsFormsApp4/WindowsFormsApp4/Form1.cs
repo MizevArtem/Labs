@@ -46,6 +46,7 @@ namespace WindowsFormsApp4
             dataGridView1.Rows.Add();
             int countRow = dataGridView1.RowCount;
             DataGridViewRow newRow = dataGridView1.Rows[countRow - 1];
+            //TODO: databinding
             newRow.Cells[0].Value = countRow;
             string nameOfMovement;
             switch(movement.GetType().Name)
