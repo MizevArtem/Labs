@@ -80,7 +80,6 @@
             this.TimeTextBox.Name = "TimeTextBox";
             this.TimeTextBox.Size = new System.Drawing.Size(100, 20);
             this.TimeTextBox.TabIndex = 1;
-            this.TimeTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 

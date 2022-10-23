@@ -1,8 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace ClassLibrary3
 {
+    [Serializable]
+    [XmlInclude(typeof(UniformMovement))]
+    [XmlInclude(typeof(UniformlyAcceleratedMotion))]
+    [XmlInclude(typeof(OscillatoryMotion))]
+
     /// <summary>
     /// Базовый клас для всех видов движения
     /// </summary>

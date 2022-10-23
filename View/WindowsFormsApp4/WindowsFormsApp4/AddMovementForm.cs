@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace WindowsFormsApp4
 {
+    /// <summary>
+    /// Класс формы создания и добавления движения
+    /// </summary>
     public partial class AddMovementForm : Form
     {
         /// <summary>
@@ -217,11 +220,6 @@ namespace WindowsFormsApp4
                 PropertyInfo pi = Movement.GetType().GetProperty(parametersName);
                 pi.SetValue(Movement, Convert.ChangeType(control.Text, pi.PropertyType));
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         /// <summary>

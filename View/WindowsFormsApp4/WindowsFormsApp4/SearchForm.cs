@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp4
 {
+    /// <summary>
+    /// Класс формы для задания параметров поиска
+    /// </summary>
     public partial class SearchForm : Form
     {
         /// <summary>
@@ -12,16 +15,23 @@ namespace WindowsFormsApp4
         private const string CorrectParametersValue = @"(^(-)?([0-9]+)(,|.)?([0-9])+$)|(^(-)?([0-9])+$)";
 
         /// <summary>
-        /// Экземляр класса MovementBase для вытягивания выбора с родительской формы
+        /// Коллекция для вытягивания выбора с родительской формы
         /// </summary>
-        //TODO: Переделать на MoveBase
         public (double Coordinate, double Time) ParametrsMovement;
 
+        /// <summary>
+        /// Конструктор формы для задания параметров поиска
+        /// </summary>
         public SearchForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки "Ок"
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
         private void okButton_Click(object sender, EventArgs e)
         {
             try 
