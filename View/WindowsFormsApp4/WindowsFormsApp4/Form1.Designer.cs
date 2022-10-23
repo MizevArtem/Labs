@@ -30,21 +30,18 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeMovement = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndCoordinate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.searchButton = new System.Windows.Forms.Button();
-            this.ckearButton = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -67,38 +64,11 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Number,
-            this.TypeMovement,
-            this.Time,
-            this.EndCoordinate});
+            this.Number});
             this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(465, 207);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // Number
-            // 
-            this.Number.HeaderText = "№";
-            this.Number.Name = "Number";
-            this.Number.Width = 30;
-            // 
-            // TypeMovement
-            // 
-            this.TypeMovement.HeaderText = "Тип движения";
-            this.TypeMovement.Name = "TypeMovement";
-            this.TypeMovement.Width = 200;
-            // 
-            // Time
-            // 
-            this.Time.HeaderText = "Время";
-            this.Time.Name = "Time";
-            this.Time.Width = 70;
-            // 
-            // EndCoordinate
-            // 
-            this.EndCoordinate.HeaderText = "Координата";
-            this.EndCoordinate.Name = "EndCoordinate";
-            this.EndCoordinate.Width = 70;
             // 
             // menuStrip1
             // 
@@ -136,7 +106,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.searchButton);
-            this.groupBox2.Controls.Add(this.ckearButton);
+            this.groupBox2.Controls.Add(this.clearButton);
             this.groupBox2.Controls.Add(this.removeButton);
             this.groupBox2.Controls.Add(this.addButton);
             this.groupBox2.Location = new System.Drawing.Point(12, 265);
@@ -156,14 +126,15 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.button4_Click);
             // 
-            // ckearButton
+            // clearButton
             // 
-            this.ckearButton.Location = new System.Drawing.Point(256, 16);
-            this.ckearButton.Name = "ckearButton";
-            this.ckearButton.Size = new System.Drawing.Size(90, 23);
-            this.ckearButton.TabIndex = 5;
-            this.ckearButton.Text = "Очистить";
-            this.ckearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Location = new System.Drawing.Point(256, 16);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(90, 23);
+            this.clearButton.TabIndex = 5;
+            this.clearButton.Text = "Очистить";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // removeButton
             // 
@@ -173,7 +144,7 @@
             this.removeButton.TabIndex = 4;
             this.removeButton.Text = "Удалить";
             this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.button2_Click);
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // addButton
             // 
@@ -188,6 +159,12 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // Number
+            // 
+            this.Number.HeaderText = "№";
+            this.Number.Name = "Number";
+            this.Number.Width = 30;
             // 
             // MainForm
             // 
@@ -223,15 +200,12 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.Button ckearButton;
+        private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TypeMovement;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EndCoordinate;
     }
 }
 

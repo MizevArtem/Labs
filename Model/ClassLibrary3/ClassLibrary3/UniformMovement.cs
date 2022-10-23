@@ -24,6 +24,7 @@ namespace ClassLibrary3
                 _speed = value;
             }
         }
+        
 
         /// <summary>
         /// Конструктор равномерного движения
@@ -49,6 +50,8 @@ namespace ClassLibrary3
         /// Констукрутор по умолчанию
         /// </summary>
         public UniformMovement() : this(0, 0) { }
+
+        public override string TypeMovement => "Равномерное движение";
 
         /// <summary>
         /// Вычисления координаты объекты в заданный момент времени

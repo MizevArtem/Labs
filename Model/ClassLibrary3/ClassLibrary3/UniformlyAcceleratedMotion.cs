@@ -50,6 +50,8 @@ namespace ClassLibrary3
         /// </summary>
         public UniformlyAcceleratedMotion() : this(0, 0, 0) { }
 
+        public override string TypeMovement => "Равноускоренное движение";
+
         /// <summary>
         /// Вычисления координаты объекты в заданный момент времени
         /// </summary>

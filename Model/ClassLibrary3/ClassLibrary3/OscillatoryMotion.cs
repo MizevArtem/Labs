@@ -15,6 +15,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Метод для работы с амлитудой колебаний
         /// </summary>
+        
         public double Amplitude 
         {
             get { return _amplitude; }
@@ -60,6 +61,8 @@ namespace ClassLibrary3
         /// Конструктор по умолчанию
         /// </summary>
         public OscillatoryMotion() : this(0, 0, 0) { }
+
+        public override string TypeMovement => "Колебательное движение";
 
         /// <summary>
         /// Вычисления координаты объекты в заданный момент времени

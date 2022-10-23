@@ -120,17 +120,20 @@ namespace WindowsFormsApp4
         /// выбранный тип движения</param>
         private void CreateFields(PropertyInfo[] properties)
         {
-            //TODO:
-            int y = 65;
+            //TODO: | Сделано покрасивше
+            int controlY = 65;
+            const int stepByY = 43;
+            
             foreach (PropertyInfo field in properties)
             {
-                //TODO: строковй ключ
-                if (field.Name != "Time")
+                //TODO: строковй ключ | переделан
+                if (field.Name != nameof(MovementBase.Time) &&
+                    field.Name != nameof(MovementBase.TypeMovement))
                 {
-                    CreateLabels(field, y);
-                    CreateEdits(field, y);
+                    CreateLabels(field, controlY);
+                    CreateEdits(field, controlY);
+                    controlY += stepByY;
                 }
-                y += 43;
             }
         }
 
@@ -144,20 +147,20 @@ namespace WindowsFormsApp4
             Label label = new Label();
             switch(field.Name)
             {
-                //TODO: строковй ключ
-                case "StartPosition":
+                //TODO: строковй ключ | переделаны
+                case nameof(MovementBase.StartPosition):
                     label.Text = "Начальное положение, м";
                     break;
-                case "Speed":
+                case nameof(UniformMovement.Speed):
                     label.Text = "Скорсоть, м/с";
                     break;
-                case "Acceleration":
+                case nameof(UniformlyAcceleratedMotion.Acceleration):
                     label.Text = "Ускороение, м/с^2";
                     break;
-                case "Amplitude":
+                case nameof(OscillatoryMotion.Amplitude):
                     label.Text = "Амплитуда, м";
                     break;
-                case "CyclicFrequency":
+                case nameof(OscillatoryMotion.CyclicFrequency):
                     label.Text = "Циклическая частота, рад/с";
                     break;
                 default:
@@ -232,12 +235,12 @@ namespace WindowsFormsApp4
             int selectTypeMovement = rand.Next(0, comboBox1.Items.Count);
             comboBox1.Text = comboBox1.Items[selectTypeMovement].ToString();
 
-            //TODO: строковй ключ
+            //TODO: строковй ключ | переделаны
             List<string> parametersThatMustBeGreaterThanZero = new List<string>
             {
                 nameof(MovementBase.Time),
-                "Amplitude",
-                "CyclicFrequency"
+                nameof(OscillatoryMotion.Amplitude),
+                nameof(OscillatoryMotion.CyclicFrequency)
             };
 
             foreach (Control control in groupBox1.Controls)
@@ -246,13 +249,16 @@ namespace WindowsFormsApp4
                 {
                     continue;
                 }
-                //TODO:
+                //TODO: | добавлены переменные
+                const int minRandomValue = -100;
+                const int maxRadomValue = 100;
+
                 if (parametersThatMustBeGreaterThanZero.Any((word) => control.Name.Contains(word)))
                 {
-                    control.Text = rand.Next(1, 64).ToString();
+                    control.Text = rand.Next(1, maxRadomValue).ToString();
                     continue;
                 }
-                control.Text = rand.Next(-100, 100).ToString();
+                control.Text = rand.Next(minRandomValue, maxRadomValue).ToString();
             }
         }
     }

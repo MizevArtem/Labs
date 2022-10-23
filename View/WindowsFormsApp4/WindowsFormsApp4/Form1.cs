@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Linq;
 using ClassLibrary3;
 
 namespace WindowsFormsApp4
 {
     public partial class MainForm : Form
     {
+        private BindingList<MovementBase> MovementList = new BindingList<MovementBase>();
 
-        private List<MovementBase> MovementList = new List<MovementBase>();
+        private BindingList<MovementBase> FiltredMovementList = new BindingList<MovementBase>();
 
+        private bool ActiveSearch = false;
         public MainForm()
         {
             InitializeComponent();
+            dataGridView1.DataSource = MovementList;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -20,13 +25,81 @@ namespace WindowsFormsApp4
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void removeButton_Click(object sender, EventArgs e)
         {
+            CreatingDeletionList();
+        }
 
+        private void CreatingDeletionList()
+        {
+            List<int> deletedRows = new List<int>();
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    deletedRows.Add(row.Index);
+                }
+            }
+            else
+            {
+                foreach (DataGridViewCell cell in dataGridView1.SelectedCells)
+                {
+                    deletedRows.Add(cell.RowIndex);
+                }
+            }
+            deletedRows.Sort((index1, index2) => index2.CompareTo(index1));
+            DeleteElements(deletedRows.Distinct().ToList());
+            ReIndex();
+        }
+
+        private void DeleteElements(List<int> deletedIndexs)
+        {
+            foreach (int index in deletedIndexs)
+            {
+                MovementList.RemoveAt(index);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.RowCount == 0 && !ActiveSearch)
+            {
+                MessageBox.Show("Поиск не возможен - отсутствет движение.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (ActiveSearch)
+            {
+                dataGridView1.DataSource = MovementList;
+                FiltredMovementList.Clear();
+                (sender as Button).Text = "Поиск";
+            }
+            else
+            {
+                SearchForm form = new SearchForm();
+                form.ShowDialog();
+                if (form.DialogResult != DialogResult.OK)
+                    return;
+                foreach (var movement in MovementList)
+                {
+                    if (movement.Time == form.ParametrsMovement.Time
+                        && movement.StartPosition == form.ParametrsMovement.Coordinate)
+                    {
+                        FiltredMovementList.Add(movement);
+                    }
+                }
+                if (FiltredMovementList.Count != 0)
+                {
+                    dataGridView1.DataSource = FiltredMovementList;
+                    (sender as Button).Text = "Сброс";
+                }
+                else
+                {
+                    MessageBox.Show("Движение с указанными параметрами отсутствует.", "Уведомление");
+                    return;
+                }
+            }
+            ActiveSearch = !ActiveSearch;
 
         }
 
@@ -36,37 +109,19 @@ namespace WindowsFormsApp4
             form.ShowDialog();
             if (form.DialogResult != DialogResult.OK)
                 return;
-            AddMovement(form.Movement);
+            //TODO: databinding | Исправлено
+            MovementList.Add(form.Movement);
             form.Dispose();
+            ReIndex();
         }
 
-        private void AddMovement(MovementBase movement)
+        private void ReIndex()
         {
-            MovementList.Add(movement);
-            dataGridView1.Rows.Add();
             int countRow = dataGridView1.RowCount;
-            DataGridViewRow newRow = dataGridView1.Rows[countRow - 1];
-            //TODO: databinding
-            newRow.Cells[0].Value = countRow;
-            string nameOfMovement;
-            switch(movement.GetType().Name)
+            for (int i = 0; i < countRow; i++)
             {
-                case "UniformMovement":
-                    nameOfMovement = "Равномерное движение";
-                    break;
-                case "UniformlyAcceleratedMotion":
-                    nameOfMovement = "Равноускоренное движение";
-                    break;
-                case "OscillatoryMotion":
-                    nameOfMovement = "Колебательное движение";
-                    break;
-                default:
-                    nameOfMovement = "Неизвестный вид движения";
-                    break;
+                dataGridView1.Rows[i].Cells[0].Value = i + 1;
             }
-            newRow.Cells[1].Value = nameOfMovement;
-            newRow.Cells[2].Value = movement.Time;
-            newRow.Cells[3].Value = movement.PositionCalculation();
         }
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +132,15 @@ namespace WindowsFormsApp4
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Selected = true;
+            }
+            CreatingDeletionList();
         }
     }
 }

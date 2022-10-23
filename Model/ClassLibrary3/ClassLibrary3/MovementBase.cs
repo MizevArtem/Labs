@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace ClassLibrary3
 {
@@ -10,6 +11,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Начальное положение объекта 
         /// </summary>
+        [DisplayName("Начальное положение")]
         public double StartPosition { get; set; }
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Свойство для работы со временем
         /// </summary>
+        [DisplayName("Время")]
         public double Time
         {
             get
@@ -56,6 +59,9 @@ namespace ClassLibrary3
         /// Метод расчета положения тела
         /// </summary>
         public abstract double PositionCalculation();
+
+        [DisplayName("Вид движения")]
+        public abstract string TypeMovement { get; }
 
         /// <summary>
         /// Функция проверки параметра на допустимость значения
