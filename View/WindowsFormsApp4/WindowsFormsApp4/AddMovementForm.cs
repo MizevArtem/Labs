@@ -14,6 +14,7 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class AddMovementForm : Form
     {
+        //TODO: дубль
         /// <summary>
         /// Регулярка для проверки правильности введеных параметров
         /// </summary>
@@ -95,8 +96,7 @@ namespace WindowsFormsApp4
         /// <param name="e"></param>
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MovementsType selectTypeMovement;
-            selectTypeMovement = (MovementsType)(sender as ComboBox).SelectedIndex;
+            MovementsType selectTypeMovement = (MovementsType)(sender as ComboBox).SelectedIndex;
 
             switch (selectTypeMovement)
             {
@@ -123,13 +123,11 @@ namespace WindowsFormsApp4
         /// выбранный тип движения</param>
         private void CreateFields(PropertyInfo[] properties)
         {
-            //TODO: | Сделано покрасивше
             int controlY = 65;
             const int stepByY = 43;
             
             foreach (PropertyInfo field in properties)
             {
-                //TODO: строковй ключ | переделан
                 if (field.Name != nameof(MovementBase.Time) &&
                     field.Name != nameof(MovementBase.TypeMovement))
                 {
@@ -150,7 +148,6 @@ namespace WindowsFormsApp4
             Label label = new Label();
             switch(field.Name)
             {
-                //TODO: строковй ключ | переделаны
                 case nameof(MovementBase.StartPosition):
                     label.Text = "Начальное положение, м";
                     break;
@@ -217,6 +214,7 @@ namespace WindowsFormsApp4
                     control.Text = control.Text.Replace(".", ",");
                 }
                 string parametersName = control.Name.Replace("TextBox","");
+                //TODO: RSDN
                 PropertyInfo pi = Movement.GetType().GetProperty(parametersName);
                 pi.SetValue(Movement, Convert.ChangeType(control.Text, pi.PropertyType));
             }
@@ -232,8 +230,7 @@ namespace WindowsFormsApp4
             Random rand = new Random();
             int selectTypeMovement = rand.Next(0, comboBox1.Items.Count);
             comboBox1.Text = comboBox1.Items[selectTypeMovement].ToString();
-
-            //TODO: строковй ключ | переделаны
+            
             List<string> parametersThatMustBeGreaterThanZero = new List<string>
             {
                 nameof(MovementBase.Time),
@@ -247,7 +244,7 @@ namespace WindowsFormsApp4
                 {
                     continue;
                 }
-                //TODO: | добавлены переменные
+
                 const int minRandomValue = -100;
                 const int maxRadomValue = 100;
 

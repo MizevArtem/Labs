@@ -14,16 +14,19 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class MainForm : Form
     {
+        //TODO: RSDN
         /// <summary>
         /// Лист для экземплятор класса MovementBase для отображения в DataGridView
         /// </summary>
         private BindingList<MovementBase> MovementList = new BindingList<MovementBase>();
 
+        //TODO: RSDN
         /// <summary>
         /// Лист для экземплятор класса MovementBase для отображения результатов поиска в DataGridView
         /// </summary>
         private BindingList<MovementBase> FiltredMovementList = new BindingList<MovementBase>();
 
+        //TODO: RSDN
         /// <summary>
         /// Переменная для хранения состояния осуществления поиска
         /// </summary>
@@ -38,6 +41,7 @@ namespace WindowsFormsApp4
             dataGridView1.DataSource = MovementList;
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Обработчик нажатия кнопки "Удалить"
         /// </summary>
@@ -111,8 +115,9 @@ namespace WindowsFormsApp4
                     return;
                 foreach (var movement in MovementList)
                 {
-                    if (movement.Time == form.ParametrsMovement.Time
-                        && movement.StartPosition == form.ParametrsMovement.Coordinate)
+                    var tmpMovement = form.ParametrsMovement;
+                    if (movement.Time == tmpMovement.Time
+                        && movement.StartPosition == tmpMovement.Coordinate)
                     {
                         FiltredMovementList.Add(movement);
                     }
@@ -152,9 +157,9 @@ namespace WindowsFormsApp4
         {
             AddMovementForm form = new AddMovementForm();
             form.ShowDialog();
-            if (form.DialogResult != DialogResult.OK)
-                return;
-            //TODO: databinding | Исправлено
+
+            if (form.DialogResult != DialogResult.OK) return;
+
             MovementList.Add(form.Movement);
             form.Dispose();
             ReIndex();
@@ -199,6 +204,7 @@ namespace WindowsFormsApp4
             }
             else
             {
+                //TODO: RSDN
                 var serializer = new XmlSerializer(typeof(BindingList<MovementBase>));
                 using (FileStream fs = new FileStream(saveFileDialog.FileName + ".xml", FileMode.OpenOrCreate))
                 {
@@ -230,6 +236,7 @@ namespace WindowsFormsApp4
                 }
                 catch (Exception)
                 {
+                    //TODO: RSDN
                     MessageBox.Show("Не удалось открыть выбранный файл. Проверьте тот ли файл вы пытаетесь открыть",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

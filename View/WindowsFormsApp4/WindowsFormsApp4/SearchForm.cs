@@ -9,6 +9,7 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class SearchForm : Form
     {
+        //TODO: дубль
         /// <summary>
         /// Регулярка для проверки правильности введеных параметров
         /// </summary>
@@ -46,7 +47,7 @@ namespace WindowsFormsApp4
                      !regex.IsMatch(timeTextBox.Text))
                 {
                     throw new Exception("Параметры поиска должны быть числами.");
-                }
+                }//TODO: RSDN
                 if (!double.TryParse(coordinateTextBox.Text.Replace(".", ","), out ParametrsMovement.Coordinate))
                 {
                     throw new Exception("Не удалось считать координату");
