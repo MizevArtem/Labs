@@ -14,23 +14,23 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class MainForm : Form
     {
-        //TODO: RSDN
+        //TODO: RSDN | +
         /// <summary>
         /// Лист для экземплятор класса MovementBase для отображения в DataGridView
         /// </summary>
-        private BindingList<MovementBase> MovementList = new BindingList<MovementBase>();
+        private BindingList<MovementBase> _movementList = new BindingList<MovementBase>();
 
-        //TODO: RSDN
+        //TODO: RSDN | +
         /// <summary>
         /// Лист для экземплятор класса MovementBase для отображения результатов поиска в DataGridView
         /// </summary>
-        private BindingList<MovementBase> FiltredMovementList = new BindingList<MovementBase>();
+        private BindingList<MovementBase> _filtredMovementList = new BindingList<MovementBase>();
 
-        //TODO: RSDN
+        //TODO: RSDN | +
         /// <summary>
         /// Переменная для хранения состояния осуществления поиска
         /// </summary>
-        private bool ActiveSearch = false;
+        private bool _isActiveSearch = false;
 
         /// <summary>
         /// Конструктор главной формы
@@ -38,16 +38,16 @@ namespace WindowsFormsApp4
         public MainForm()
         {
             InitializeComponent();
-            dataGridView1.DataSource = MovementList;
+            dataGridView1.DataSource = _movementList;
         }
 
-        //TODO: RSDN
+        //TODO: RSDN  | +
         /// <summary>
         /// Обработчик нажатия кнопки "Удалить"
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void removeButton_Click(object sender, EventArgs e)
+        private void RemoveButton_Click(object sender, EventArgs e)
         {
             CreatingDeletionList();
         }
@@ -86,7 +86,7 @@ namespace WindowsFormsApp4
         {
             foreach (int index in deletedIndexs)
             {
-                MovementList.RemoveAt(index);
+                _movementList.RemoveAt(index);
             }
         }
 
@@ -97,13 +97,13 @@ namespace WindowsFormsApp4
         /// <param name="e">e</param>
         private void searchButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.RowCount == 0 && !ActiveSearch)
+            if (dataGridView1.RowCount == 0 && !_isActiveSearch)
             {
                 MessageBox.Show("Поиск не возможен - отсутствет движение.", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (ActiveSearch)
+            if (_isActiveSearch)
             {
                 ResetDataGrid();
             }
@@ -113,18 +113,18 @@ namespace WindowsFormsApp4
                 form.ShowDialog();
                 if (form.DialogResult != DialogResult.OK)
                     return;
-                foreach (var movement in MovementList)
+                foreach (var movement in _movementList)
                 {
                     var tmpMovement = form.ParametrsMovement;
                     if (movement.Time == tmpMovement.Time
                         && movement.StartPosition == tmpMovement.Coordinate)
                     {
-                        FiltredMovementList.Add(movement);
+                        _filtredMovementList.Add(movement);
                     }
                 }
-                if (FiltredMovementList.Count != 0)
+                if (_filtredMovementList.Count != 0)
                 {
-                    dataGridView1.DataSource = FiltredMovementList;
+                    dataGridView1.DataSource = _filtredMovementList;
                     (sender as Button).Text = "Сброс";
                 }
                 else
@@ -132,7 +132,7 @@ namespace WindowsFormsApp4
                     MessageBox.Show("Движение с указанными параметрами отсутствует.", "Уведомление");
                     return;
                 }
-                ActiveSearch = true;
+                _isActiveSearch = true;
             }
             ReIndex();
         }
@@ -142,10 +142,10 @@ namespace WindowsFormsApp4
         /// </summary>
         private void ResetDataGrid()
         {
-            dataGridView1.DataSource = MovementList;
-            FiltredMovementList.Clear();
+            dataGridView1.DataSource = _movementList;
+            _filtredMovementList.Clear();
             searchButton.Text = "Поиск";
-            ActiveSearch = false;
+            _isActiveSearch = false;
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace WindowsFormsApp4
 
             if (form.DialogResult != DialogResult.OK) return;
 
-            MovementList.Add(form.Movement);
+            _movementList.Add(form.Movement);
             form.Dispose();
             ReIndex();
         }
@@ -204,11 +204,12 @@ namespace WindowsFormsApp4
             }
             else
             {
-                //TODO: RSDN
+                //TODO: RSDN | +
                 var serializer = new XmlSerializer(typeof(BindingList<MovementBase>));
-                using (FileStream fs = new FileStream(saveFileDialog.FileName + ".xml", FileMode.OpenOrCreate))
+                using (var fileStream = new FileStream($"{saveFileDialog.FileName}.xml",
+                                                                FileMode.OpenOrCreate))
                 {
-                    serializer.Serialize(fs, dataGridView1.DataSource);
+                    serializer.Serialize(fileStream, dataGridView1.DataSource);
                 }
             }
         }
@@ -231,13 +232,14 @@ namespace WindowsFormsApp4
                     var serializer = new XmlSerializer(typeof(BindingList<MovementBase>));
                     using (FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open))
                     {
-                        MovementList =  (BindingList<MovementBase>) serializer.Deserialize(fs);
+                        _movementList =  (BindingList<MovementBase>) serializer.Deserialize(fs);
                     }
                 }
                 catch (Exception)
                 {
-                    //TODO: RSDN
-                    MessageBox.Show("Не удалось открыть выбранный файл. Проверьте тот ли файл вы пытаетесь открыть",
+                    //TODO: RSDN | +
+                    MessageBox.Show("Не удалось открыть выбранный файл. " +
+                        "Проверьте тот ли файл вы пытаетесь открыть",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 

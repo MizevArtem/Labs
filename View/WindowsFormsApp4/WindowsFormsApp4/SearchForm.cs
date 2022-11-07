@@ -9,12 +9,6 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class SearchForm : Form
     {
-        //TODO: дубль
-        /// <summary>
-        /// Регулярка для проверки правильности введеных параметров
-        /// </summary>
-        private const string CorrectParametersValue = @"(^(-)?([0-9]+)(,|.)?([0-9])+$)|(^(-)?([0-9])+$)";
-
         /// <summary>
         /// Коллекция для вытягивания выбора с родительской формы
         /// </summary>
@@ -42,17 +36,18 @@ namespace WindowsFormsApp4
                 {
                     throw new Exception("Параметры поиска не могут быть пустыми.");
                 }
-                Regex regex = new Regex(CorrectParametersValue);
-                if (!regex.IsMatch(coordinateTextBox.Text) ||
-                     !regex.IsMatch(timeTextBox.Text))
+                if (!CorrectValue.CheckParameterString(coordinateTextBox.Text) ||
+                     !CorrectValue.CheckParameterString(timeTextBox.Text))
                 {
                     throw new Exception("Параметры поиска должны быть числами.");
-                }//TODO: RSDN
-                if (!double.TryParse(coordinateTextBox.Text.Replace(".", ","), out ParametrsMovement.Coordinate))
+                }//TODO: RSDN | +
+                if (!double.TryParse(coordinateTextBox.Text.Replace(".", ","), 
+                                            out ParametrsMovement.Coordinate))
                 {
                     throw new Exception("Не удалось считать координату");
                 }
-                if (!double.TryParse(timeTextBox.Text.Replace(".", ","), out ParametrsMovement.Time))
+                if (!double.TryParse(timeTextBox.Text.Replace(".", ","), 
+                                            out ParametrsMovement.Time))
                 {
                     throw new Exception("Не удалось считать время");
                 }

@@ -14,12 +14,6 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class AddMovementForm : Form
     {
-        //TODO: дубль
-        /// <summary>
-        /// Регулярка для проверки правильности введеных параметров
-        /// </summary>
-        private const string CorrectParametersValue = @"(^(-)?([0-9]+)(,|.)?([0-9])+$)|(^(-)?([0-9])+$)";
-
         /// <summary>
         /// Экземляр класса MovementBase для вытягивания выбора с родительской формы
         /// </summary>
@@ -63,13 +57,12 @@ namespace WindowsFormsApp4
                     {
                         continue;
                     }
-                    Regex regex = new Regex(CorrectParametersValue);
                     if (string.IsNullOrEmpty(ctrl.Text))
                     {
                         throw new Exception("Присутствуют незаполненные строки");
                     }
                     else 
-                        if (!regex.IsMatch(ctrl.Text))
+                        if (!CorrectValue.CheckParameterString(ctrl.Text))
                         {
                             throw new Exception("Неверный формат введеных данных");
                         }
@@ -214,9 +207,10 @@ namespace WindowsFormsApp4
                     control.Text = control.Text.Replace(".", ",");
                 }
                 string parametersName = control.Name.Replace("TextBox","");
-                //TODO: RSDN
-                PropertyInfo pi = Movement.GetType().GetProperty(parametersName);
-                pi.SetValue(Movement, Convert.ChangeType(control.Text, pi.PropertyType));
+                //TODO: RSDN | +
+                var propertyInfo = Movement.GetType().GetProperty(parametersName);
+                propertyInfo.SetValue(Movement, Convert.ChangeType(control.Text,
+                                                    propertyInfo.PropertyType));
             }
         }
 

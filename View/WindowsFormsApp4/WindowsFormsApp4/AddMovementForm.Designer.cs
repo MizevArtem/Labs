@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.randomButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +92,7 @@
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(16, 290);
+            this.okButton.Location = new System.Drawing.Point(55, 290);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 3;
@@ -104,37 +103,42 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(130, 290);
+            this.cancelButton.Location = new System.Drawing.Point(174, 290);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
+#if DEBUG
+ 
             // 
             // randomButton
             // 
+            this.randomButton = new System.Windows.Forms.Button();
             this.randomButton.BackgroundImage = global::WindowsFormsApp4.Properties.Resources.GameDesign;
             this.randomButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.randomButton.Location = new System.Drawing.Point(249, 290);
+            this.randomButton.Location = new System.Drawing.Point(273, 290);
             this.randomButton.Name = "randomButton";
             this.randomButton.Size = new System.Drawing.Size(26, 23);
             this.randomButton.TabIndex = 5;
             this.randomButton.UseVisualStyleBackColor = true;
             this.randomButton.Click += new System.EventHandler(this.RandomButton_Click);
+            this.Controls.Add(this.randomButton);
+#endif
             // 
             // AddMovementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(311, 331);
-            this.Controls.Add(this.randomButton);
+            this.ClientSize = new System.Drawing.Size(311, 331); 
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AddMovementForm";
             this.Text = "Form2";
             this.groupBox1.ResumeLayout(false);
@@ -144,7 +148,7 @@
 
         }
 
-        #endregion
+#endregion
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -153,6 +157,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+#if DEBUG
         private System.Windows.Forms.Button randomButton;
+#endif
     }
 }

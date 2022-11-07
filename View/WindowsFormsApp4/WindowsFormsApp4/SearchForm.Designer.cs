@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timeTextBox = new System.Windows.Forms.TextBox();
+            this.coordinateTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.coordinateTextBox = new System.Windows.Forms.TextBox();
-            this.timeTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +50,29 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры поиска";
+            // 
+            // timeTextBox
+            // 
+            this.timeTextBox.Location = new System.Drawing.Point(224, 28);
+            this.timeTextBox.Name = "timeTextBox";
+            this.timeTextBox.Size = new System.Drawing.Size(80, 20);
+            this.timeTextBox.TabIndex = 3;
+            // 
+            // coordinateTextBox
+            // 
+            this.coordinateTextBox.Location = new System.Drawing.Point(80, 26);
+            this.coordinateTextBox.Name = "coordinateTextBox";
+            this.coordinateTextBox.Size = new System.Drawing.Size(80, 20);
+            this.coordinateTextBox.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(178, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Время";
             // 
             // label1
             // 
@@ -81,29 +104,6 @@
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(178, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Время";
-            // 
-            // coordinateTextBox
-            // 
-            this.coordinateTextBox.Location = new System.Drawing.Point(80, 26);
-            this.coordinateTextBox.Name = "coordinateTextBox";
-            this.coordinateTextBox.Size = new System.Drawing.Size(80, 20);
-            this.coordinateTextBox.TabIndex = 2;
-            // 
-            // timeTextBox
-            // 
-            this.timeTextBox.Location = new System.Drawing.Point(224, 28);
-            this.timeTextBox.Name = "timeTextBox";
-            this.timeTextBox.Size = new System.Drawing.Size(80, 20);
-            this.timeTextBox.TabIndex = 3;
-            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +113,7 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "SearchForm";
             this.Text = "Поиск";
             this.groupBox1.ResumeLayout(false);
