@@ -22,7 +22,7 @@ namespace WindowsFormsApp4
         /// <summary>
         /// Типы движения
         /// </summary>
-        public enum MovementsType
+        private enum MovementsType
         {
             UniformMotion,
             UniformlyAcceleratedMotion,
@@ -213,7 +213,7 @@ namespace WindowsFormsApp4
                                                     propertyInfo.PropertyType));
             }
         }
-
+#if DEBUG
         /// <summary>
         /// Обработчик нажатия кнопки для создания случайного движения
         /// </summary>
@@ -250,5 +250,6 @@ namespace WindowsFormsApp4
                 control.Text = rand.Next(minRandomValue, maxRadomValue).ToString();
             }
         }
+#endif
     }
 }

@@ -79,6 +79,11 @@ namespace ClassLibrary3
         public void CheckArgumnet(string param, double value,
             double minValue = double.MinValue, double maxValue = double.MaxValue)
         {
+            if (double.IsNaN(value))
+            {
+                throw new ArgumentException($"Параметр \"{param}\" не должен " +
+                                                    $"пустым (NaN)");
+            }
             if (value < minValue)
             {
                 throw new ArgumentException($"Параметр \"{param}\" не должен " +
