@@ -207,7 +207,7 @@ namespace WindowsFormsApp4
                     control.Text = control.Text.Replace(".", ",");
                 }
                 string parametersName = control.Name.Replace("TextBox","");
-                //TODO: RSDN | +
+
                 var propertyInfo = Movement.GetType().GetProperty(parametersName);
                 propertyInfo.SetValue(Movement, Convert.ChangeType(control.Text,
                                                     propertyInfo.PropertyType));

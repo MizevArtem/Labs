@@ -8,7 +8,6 @@ namespace WindowsFormsApp4
     /// </summary>
     public static class CorrectValue
     {
-        //TODO: дубль | +
         /// <summary>
         /// Регулярка для проверки правильности введеных параметров
         /// </summary>

@@ -40,7 +40,7 @@ namespace WindowsFormsApp4
                      !CorrectValue.CheckParameterString(timeTextBox.Text))
                 {
                     throw new Exception("Параметры поиска должны быть числами.");
-                }//TODO: RSDN | +
+                }
                 if (!double.TryParse(coordinateTextBox.Text.Replace(".", ","), 
                                             out ParametrsMovement.Coordinate))
                 {

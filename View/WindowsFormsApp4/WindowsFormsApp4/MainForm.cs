@@ -14,19 +14,16 @@ namespace WindowsFormsApp4
     /// </summary>
     public partial class MainForm : Form
     {
-        //TODO: RSDN | +
         /// <summary>
         /// Лист для экземплятор класса MovementBase для отображения в DataGridView
         /// </summary>
         private BindingList<MovementBase> _movementList = new BindingList<MovementBase>();
-
-        //TODO: RSDN | +
+        
         /// <summary>
         /// Лист для экземплятор класса MovementBase для отображения результатов поиска в DataGridView
         /// </summary>
         private BindingList<MovementBase> _filtredMovementList = new BindingList<MovementBase>();
-
-        //TODO: RSDN | +
+        
         /// <summary>
         /// Переменная для хранения состояния осуществления поиска
         /// </summary>
@@ -40,8 +37,7 @@ namespace WindowsFormsApp4
             InitializeComponent();
             dataGridView1.DataSource = _movementList;
         }
-
-        //TODO: RSDN  | +
+        
         /// <summary>
         /// Обработчик нажатия кнопки "Удалить"
         /// </summary>
@@ -204,7 +200,6 @@ namespace WindowsFormsApp4
             }
             else
             {
-                //TODO: RSDN | +
                 var serializer = new XmlSerializer(typeof(BindingList<MovementBase>));
                 using (var fileStream = new FileStream($"{saveFileDialog.FileName}.xml",
                                                                 FileMode.OpenOrCreate))
@@ -237,7 +232,6 @@ namespace WindowsFormsApp4
                 }
                 catch (Exception)
                 {
-                    //TODO: RSDN | +
                     MessageBox.Show("Не удалось открыть выбранный файл. " +
                         "Проверьте тот ли файл вы пытаетесь открыть",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
