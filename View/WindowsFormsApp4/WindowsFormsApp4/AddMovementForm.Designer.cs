@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.randomButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,12 +110,9 @@
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
-#if DEBUG
- 
             // 
             // randomButton
             // 
-            this.randomButton = new System.Windows.Forms.Button();
             this.randomButton.BackgroundImage = global::WindowsFormsApp4.Properties.Resources.GameDesign;
             this.randomButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.randomButton.Location = new System.Drawing.Point(273, 290);
@@ -123,15 +121,14 @@
             this.randomButton.TabIndex = 5;
             this.randomButton.UseVisualStyleBackColor = true;
             this.randomButton.Click += new System.EventHandler(this.RandomButton_Click);
-            this.Controls.Add(this.randomButton);
-#endif
             // 
             // AddMovementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(311, 331); 
+            this.ClientSize = new System.Drawing.Size(311, 331);
+            this.Controls.Add(this.randomButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.groupBox1);
@@ -140,7 +137,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddMovementForm";
-            this.Text = "Form2";
+            this.Text = "Добавление движения";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

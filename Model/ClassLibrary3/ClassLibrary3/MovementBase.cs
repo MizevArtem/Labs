@@ -17,7 +17,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Начальное положение объекта 
         /// </summary>
-        [DisplayName("Начальное положение")]
+        [DisplayName("Начальная координата")]
         public double StartPosition { get; set; }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Максимальная скорость положение объекта 
         /// </summary>
-        public const int MaxSpeed = 299792458;
+        public const int MaxSpeed = 299792458;      
 
         /// <summary>
         /// Констукрутор класса
@@ -57,6 +57,12 @@ namespace ClassLibrary3
         }
 
         /// <summary>
+        /// Конечная позиция тела
+        /// </summary>
+        [DisplayName("Конечная координата")]
+        public double EndPostition => PositionCalculation();
+
+        /// <summary>
         /// Констукрутор по умолчанию
         /// </summary>
         protected MovementBase() : this(0) { }
@@ -64,7 +70,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Метод расчета положения тела
         /// </summary>
-        public abstract double PositionCalculation();
+        protected abstract double PositionCalculation();
 
         [DisplayName("Вид движения")]
         public abstract string TypeMovement { get; }

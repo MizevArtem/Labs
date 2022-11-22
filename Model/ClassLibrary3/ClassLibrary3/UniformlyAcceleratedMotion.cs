@@ -56,7 +56,7 @@ namespace ClassLibrary3
         /// Вычисления координаты объекты в заданный момент времени
         /// </summary>
         /// /// <param name="time">Момент времени</param>
-        public override double PositionCalculation()
+        protected override double PositionCalculation()
         {
             if (Acceleration == 0)
             {

@@ -56,7 +56,7 @@ namespace ClassLibrary3
         /// <summary>
         /// Вычисления координаты объекты в заданный момент времени
         /// </summary>
-        public override double PositionCalculation()
+        protected override double PositionCalculation()
         {
             return StartPosition + Speed * Time;
         }

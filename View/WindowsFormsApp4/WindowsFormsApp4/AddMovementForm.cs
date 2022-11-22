@@ -122,7 +122,8 @@ namespace WindowsFormsApp4
             foreach (PropertyInfo field in properties)
             {
                 if (field.Name != nameof(MovementBase.Time) &&
-                    field.Name != nameof(MovementBase.TypeMovement))
+                    field.Name != nameof(MovementBase.TypeMovement) &&
+                    field.Name != nameof(MovementBase.EndPostition))
                 {
                     CreateLabels(field, controlY);
                     CreateEdits(field, controlY);
