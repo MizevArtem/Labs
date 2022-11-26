@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApp4.Properties {
+namespace view.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

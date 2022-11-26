@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9D26E088-F207-4CD8-B1BC-908E5624A8D2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowsFormsApp4</RootNamespace>
-    <AssemblyName>WindowsFormsApp4</AssemblyName>
+    <RootNamespace>view</RootNamespace>
+    <AssemblyName>view</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -102,9 +102,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Model\ClassLibrary3\ClassLibrary3\ClassLibrary3.csproj">
+    <ProjectReference Include="..\..\..\Model\ClassLibrary3\ClassLibrary3\Model.csproj">
       <Project>{e1b667d1-10cc-4855-b55f-0ff18c631b93}</Project>
-      <Name>ClassLibrary3</Name>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
