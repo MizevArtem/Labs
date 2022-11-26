@@ -104,14 +104,14 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.openToolStripMenuItem.Text = "Открыть";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.saveToolStripMenuItem.Text = "Сохранить";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // groupBox2
             // 
@@ -134,7 +134,7 @@
             this.SearchButton.TabIndex = 6;
             this.SearchButton.Text = "Поиск";
             this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // ClearButton
             // 
@@ -144,7 +144,7 @@
             this.ClearButton.TabIndex = 5;
             this.ClearButton.Text = "Очистить";
             this.ClearButton.UseVisualStyleBackColor = true;
-            this.ClearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // RemoveButton
             // 
@@ -164,7 +164,7 @@
             this.AddButton.TabIndex = 3;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
-            this.AddButton.Click += new System.EventHandler(this.addButton_Click);
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // openFileDialog
             // 

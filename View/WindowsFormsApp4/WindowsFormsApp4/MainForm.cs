@@ -91,7 +91,7 @@ namespace WindowsFormsApp4
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void searchButton_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
             if (DataGridView.RowCount == 0 && !_isActiveSearch)
             {
@@ -149,7 +149,7 @@ namespace WindowsFormsApp4
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void addButton_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
             AddMovementForm form = new AddMovementForm();
             form.ShowDialog();
@@ -178,7 +178,7 @@ namespace WindowsFormsApp4
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void clearButton_Click(object sender, EventArgs e)
+        private void ClearButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < DataGridView.RowCount; i++)
             {
@@ -192,7 +192,7 @@ namespace WindowsFormsApp4
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
             {
@@ -214,7 +214,7 @@ namespace WindowsFormsApp4
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.Cancel)
             {

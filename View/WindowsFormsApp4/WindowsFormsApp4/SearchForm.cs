@@ -27,7 +27,7 @@ namespace WindowsFormsApp4
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">e</param>
-        private void okButton_Click(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             try 
             {

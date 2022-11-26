@@ -102,7 +102,7 @@
             this.OkButton.TabIndex = 2;
             this.OkButton.Text = "Ок";
             this.OkButton.UseVisualStyleBackColor = true;
-            this.OkButton.Click += new System.EventHandler(this.okButton_Click);
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // SearchForm
             // 
