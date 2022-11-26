@@ -28,51 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LabelTypeMovement = new System.Windows.Forms.Label();
+            this.TypeMoveComboBox = new System.Windows.Forms.ComboBox();
+            this.GroupBox = new System.Windows.Forms.GroupBox();
             this.TimeTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.okButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.randomButton = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.TimeLabel = new System.Windows.Forms.Label();
+            this.OkButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
+#if DEBUG
+            this.RandomButton = new System.Windows.Forms.Button();
+#endif
+            this.GroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // LabelTypeMovement
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(13, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Тип движения:";
+            this.LabelTypeMovement.AutoSize = true;
+            this.LabelTypeMovement.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabelTypeMovement.Location = new System.Drawing.Point(13, 13);
+            this.LabelTypeMovement.Name = "LabelTypeMovement";
+            this.LabelTypeMovement.Size = new System.Drawing.Size(102, 16);
+            this.LabelTypeMovement.TabIndex = 0;
+            this.LabelTypeMovement.Text = "Тип движения:";
             // 
-            // comboBox1
+            // TypeMoveComboBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.TypeMoveComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TypeMoveComboBox.FormattingEnabled = true;
+            this.TypeMoveComboBox.Items.AddRange(new object[] {
             "Равномерное",
             "Равноускоренное",
             "Колебательное"});
-            this.comboBox1.Location = new System.Drawing.Point(121, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(182, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.TypeMoveComboBox.Location = new System.Drawing.Point(121, 12);
+            this.TypeMoveComboBox.Name = "TypeMoveComboBox";
+            this.TypeMoveComboBox.Size = new System.Drawing.Size(182, 21);
+            this.TypeMoveComboBox.TabIndex = 1;
+            this.TypeMoveComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
-            // groupBox1
+            // GroupBox
             // 
-            this.groupBox1.Controls.Add(this.TimeTextBox);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(16, 54);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(287, 221);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Параметры";
+            this.GroupBox.Controls.Add(this.TimeTextBox);
+            this.GroupBox.Controls.Add(this.TimeLabel);
+            this.GroupBox.Location = new System.Drawing.Point(16, 54);
+            this.GroupBox.Name = "GroupBox";
+            this.GroupBox.Size = new System.Drawing.Size(287, 221);
+            this.GroupBox.TabIndex = 2;
+            this.GroupBox.TabStop = false;
+            this.GroupBox.Text = "Параметры";
             // 
             // TimeTextBox
             // 
@@ -81,46 +83,48 @@
             this.TimeTextBox.Size = new System.Drawing.Size(100, 20);
             this.TimeTextBox.TabIndex = 1;
             // 
-            // label2
+            // TimeLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Время, с:";
+            this.TimeLabel.AutoSize = true;
+            this.TimeLabel.Location = new System.Drawing.Point(6, 24);
+            this.TimeLabel.Name = "TimeLabel";
+            this.TimeLabel.Size = new System.Drawing.Size(55, 13);
+            this.TimeLabel.TabIndex = 0;
+            this.TimeLabel.Text = "Время, с:";
             // 
-            // okButton
+            // OkButton
             // 
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(55, 290);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 3;
-            this.okButton.Text = "Ок";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
+            this.OkButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OkButton.Location = new System.Drawing.Point(55, 290);
+            this.OkButton.Name = "OkButton";
+            this.OkButton.Size = new System.Drawing.Size(75, 23);
+            this.OkButton.TabIndex = 3;
+            this.OkButton.Text = "Ок";
+            this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // cancelButton
+            // CancelButton
             // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(174, 290);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 4;
-            this.cancelButton.Text = "Отмена";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelButton.Location = new System.Drawing.Point(174, 290);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton.TabIndex = 4;
+            this.CancelButton.Text = "Отмена";
+            this.CancelButton.UseVisualStyleBackColor = true;
+#if DEBUG
             // 
-            // randomButton
+            // RandomButton
             // 
-            this.randomButton.BackgroundImage = global::WindowsFormsApp4.Properties.Resources.GameDesign;
-            this.randomButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.randomButton.Location = new System.Drawing.Point(273, 290);
-            this.randomButton.Name = "randomButton";
-            this.randomButton.Size = new System.Drawing.Size(26, 23);
-            this.randomButton.TabIndex = 5;
-            this.randomButton.UseVisualStyleBackColor = true;
-            this.randomButton.Click += new System.EventHandler(this.RandomButton_Click);
+            this.RandomButton.BackgroundImage = global::WindowsFormsApp4.Properties.Resources.GameDesign;
+            this.RandomButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RandomButton.Location = new System.Drawing.Point(260, 290);
+            this.RandomButton.Name = "RandomButton";
+            this.RandomButton.Size = new System.Drawing.Size(26, 23);
+            this.RandomButton.TabIndex = 5;
+            this.RandomButton.UseVisualStyleBackColor = true;
+            this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
+#endif
             // 
             // AddMovementForm
             // 
@@ -128,18 +132,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(311, 331);
-            this.Controls.Add(this.randomButton);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label1);
+#if DEBUG
+            this.Controls.Add(this.RandomButton);
+#endif
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.GroupBox);
+            this.Controls.Add(this.TypeMoveComboBox);
+            this.Controls.Add(this.LabelTypeMovement);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddMovementForm";
             this.Text = "Добавление движения";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GroupBox.ResumeLayout(false);
+            this.GroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,15 +153,15 @@
 
 #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label LabelTypeMovement;
+        private System.Windows.Forms.ComboBox TypeMoveComboBox;
+        private System.Windows.Forms.GroupBox GroupBox;
         private System.Windows.Forms.TextBox TimeTextBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Label TimeLabel;
+        private System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.Button CancelButton;
 #if DEBUG
-        private System.Windows.Forms.Button randomButton;
+        private System.Windows.Forms.Button RandomButton;
 #endif
     }
 }

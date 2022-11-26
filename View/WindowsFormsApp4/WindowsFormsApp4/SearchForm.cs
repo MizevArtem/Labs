@@ -31,17 +31,17 @@ namespace WindowsFormsApp4
         {
             try 
             {
-                if (string.IsNullOrEmpty(coordinateTextBox.Text) &&
+                if (string.IsNullOrEmpty(CoordinateTextBox.Text) &&
                    string.IsNullOrEmpty(timeTextBox.Text))
                 {
                     throw new Exception("Параметры поиска не могут быть пустыми.");
                 }
-                if (!CorrectValue.CheckParameterString(coordinateTextBox.Text) ||
+                if (!CorrectValue.CheckParameterString(CoordinateTextBox.Text) ||
                      !CorrectValue.CheckParameterString(timeTextBox.Text))
                 {
                     throw new Exception("Параметры поиска должны быть числами.");
                 }
-                if (!double.TryParse(coordinateTextBox.Text.Replace(".", ","), 
+                if (!double.TryParse(CoordinateTextBox.Text.Replace(".", ","), 
                                             out ParametrsMovement.Coordinate))
                 {
                     throw new Exception("Не удалось считать координату");

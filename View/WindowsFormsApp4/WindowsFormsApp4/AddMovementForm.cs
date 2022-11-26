@@ -46,12 +46,12 @@ namespace WindowsFormsApp4
         {
             try
             {
-                if (string.IsNullOrEmpty(comboBox1.Text))
+                if (string.IsNullOrEmpty(TypeMoveComboBox.Text))
                 {
                     throw new Exception("Не выбран тип движения");
                 }
 
-                foreach (Control ctrl in groupBox1.Controls)
+                foreach (Control ctrl in GroupBox.Controls)
                 {
                     if (ctrl.GetType() == typeof(Label))
                     {
@@ -164,7 +164,7 @@ namespace WindowsFormsApp4
 
             label.AutoSize = true;
             label.Location = new Point(6, y);
-            groupBox1.Controls.Add(label);
+            GroupBox.Controls.Add(label);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace WindowsFormsApp4
             edit.Name = $"{field.Name}TextBox";
             edit.Location = new Point(170, y - 2);
             edit.Size = new Size(100, 20);
-            groupBox1.Controls.Add(edit);
+            GroupBox.Controls.Add(edit);
         }
 
         /// <summary>
@@ -186,9 +186,9 @@ namespace WindowsFormsApp4
         /// </summary>
         private void ConstrolsRemove()
         {
-            for (int i = groupBox1.Controls.Count - 1; i > 1; i--)
+            for (int i = GroupBox.Controls.Count - 1; i > 1; i--)
             {
-                groupBox1.Controls.Remove(groupBox1.Controls[i]);
+                GroupBox.Controls.Remove(GroupBox.Controls[i]);
             }
         }
 
@@ -197,7 +197,7 @@ namespace WindowsFormsApp4
         /// </summary>
         private void FillModelParametrs()
         {
-            foreach (Control control in groupBox1.Controls)
+            foreach (Control control in GroupBox.Controls)
             {
                 if (control is Label)
                 {
@@ -223,8 +223,8 @@ namespace WindowsFormsApp4
         private void RandomButton_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
-            int selectTypeMovement = rand.Next(0, comboBox1.Items.Count);
-            comboBox1.Text = comboBox1.Items[selectTypeMovement].ToString();
+            int selectTypeMovement = rand.Next(0, TypeMoveComboBox.Items.Count);
+            TypeMoveComboBox.Text = TypeMoveComboBox.Items[selectTypeMovement].ToString();
             
             List<string> parametersThatMustBeGreaterThanZero = new List<string>
             {
@@ -233,7 +233,7 @@ namespace WindowsFormsApp4
                 nameof(OscillatoryMotion.CyclicFrequency)
             };
 
-            foreach (Control control in groupBox1.Controls)
+            foreach (Control control in GroupBox.Controls)
             {
                 if (control is Label)
                 {

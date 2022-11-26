@@ -35,7 +35,7 @@ namespace WindowsFormsApp4
         public MainForm()
         {
             InitializeComponent();
-            dataGridView1.DataSource = _movementList;
+            DataGridView.DataSource = _movementList;
         }
         
         /// <summary>
@@ -55,16 +55,16 @@ namespace WindowsFormsApp4
         private void CreatingDeletionList()
         {
             List<int> deletedRows = new List<int>();
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (DataGridView.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                foreach (DataGridViewRow row in DataGridView.SelectedRows)
                 {
                     deletedRows.Add(row.Index);
                 }
             }
             else
             {
-                foreach (DataGridViewCell cell in dataGridView1.SelectedCells)
+                foreach (DataGridViewCell cell in DataGridView.SelectedCells)
                 {
                     deletedRows.Add(cell.RowIndex);
                 }
@@ -93,7 +93,7 @@ namespace WindowsFormsApp4
         /// <param name="e">e</param>
         private void searchButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.RowCount == 0 && !_isActiveSearch)
+            if (DataGridView.RowCount == 0 && !_isActiveSearch)
             {
                 MessageBox.Show("Поиск не возможен - отсутствет движение.", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,7 +120,7 @@ namespace WindowsFormsApp4
                 }
                 if (_filtredMovementList.Count != 0)
                 {
-                    dataGridView1.DataSource = _filtredMovementList;
+                    DataGridView.DataSource = _filtredMovementList;
                     (sender as Button).Text = "Сброс";
                 }
                 else
@@ -138,9 +138,9 @@ namespace WindowsFormsApp4
         /// </summary>
         private void ResetDataGrid()
         {
-            dataGridView1.DataSource = _movementList;
+            DataGridView.DataSource = _movementList;
             _filtredMovementList.Clear();
-            searchButton.Text = "Поиск";
+            SearchButton.Text = "Поиск";
             _isActiveSearch = false;
         }
 
@@ -166,10 +166,10 @@ namespace WindowsFormsApp4
         /// </summary>
         private void ReIndex()
         {
-            int countRow = dataGridView1.RowCount;
+            int countRow = DataGridView.RowCount;
             for (int i = 0; i < countRow; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = i + 1;
+                DataGridView.Rows[i].Cells[0].Value = i + 1;
             }
         }
 
@@ -180,9 +180,9 @@ namespace WindowsFormsApp4
         /// <param name="e">e</param>
         private void clearButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            for (int i = 0; i < DataGridView.RowCount; i++)
             {
-                dataGridView1.Rows[i].Selected = true;
+                DataGridView.Rows[i].Selected = true;
             }
             CreatingDeletionList();
         }
@@ -204,7 +204,7 @@ namespace WindowsFormsApp4
                 using (var fileStream = new FileStream($"{saveFileDialog.FileName}.xml",
                                                                 FileMode.OpenOrCreate))
                 {
-                    serializer.Serialize(fileStream, dataGridView1.DataSource);
+                    serializer.Serialize(fileStream, DataGridView.DataSource);
                 }
             }
         }

@@ -28,60 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.GroupBox = new System.Windows.Forms.GroupBox();
+            this.DataGridView = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
+            this.MenuStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // GroupBox
             // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 27);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(490, 232);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Перечень движений";
+            this.GroupBox.Controls.Add(this.DataGridView);
+            this.GroupBox.Location = new System.Drawing.Point(12, 27);
+            this.GroupBox.Name = "GroupBox";
+            this.GroupBox.Size = new System.Drawing.Size(490, 232);
+            this.GroupBox.TabIndex = 0;
+            this.GroupBox.TabStop = false;
+            this.GroupBox.Text = "Перечень движений";
             // 
-            // dataGridView1
+            // DataGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataGridView.AllowUserToAddRows = false;
+            this.DataGridView.AllowUserToDeleteRows = false;
+            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number});
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dataGridView1.Size = new System.Drawing.Size(478, 207);
-            this.dataGridView1.TabIndex = 0;
+            this.DataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.DataGridView.Location = new System.Drawing.Point(6, 19);
+            this.DataGridView.Name = "DataGridView";
+            this.DataGridView.ReadOnly = true;
+            this.DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
+            this.DataGridView.Size = new System.Drawing.Size(478, 207);
+            this.DataGridView.TabIndex = 0;
             // 
-            // menuStrip1
+            // Number
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Number.HeaderText = "№";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            this.Number.Width = 30;
+            // 
+            // MenuStrip
+            // 
+            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(514, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip.Name = "MenuStrip";
+            this.MenuStrip.Size = new System.Drawing.Size(514, 24);
+            this.MenuStrip.TabIndex = 1;
+            this.MenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -108,10 +115,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.searchButton);
-            this.groupBox2.Controls.Add(this.clearButton);
-            this.groupBox2.Controls.Add(this.removeButton);
-            this.groupBox2.Controls.Add(this.addButton);
+            this.groupBox2.Controls.Add(this.SearchButton);
+            this.groupBox2.Controls.Add(this.ClearButton);
+            this.groupBox2.Controls.Add(this.RemoveButton);
+            this.groupBox2.Controls.Add(this.AddButton);
             this.groupBox2.Location = new System.Drawing.Point(12, 265);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(490, 45);
@@ -119,56 +126,49 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Расчет";
             // 
-            // searchButton
+            // SearchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(382, 16);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(90, 23);
-            this.searchButton.TabIndex = 6;
-            this.searchButton.Text = "Поиск";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.SearchButton.Location = new System.Drawing.Point(382, 16);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(90, 23);
+            this.SearchButton.TabIndex = 6;
+            this.SearchButton.Text = "Поиск";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // clearButton
+            // ClearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(256, 16);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(90, 23);
-            this.clearButton.TabIndex = 5;
-            this.clearButton.Text = "Очистить";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.ClearButton.Location = new System.Drawing.Point(256, 16);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(90, 23);
+            this.ClearButton.TabIndex = 5;
+            this.ClearButton.Text = "Очистить";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
-            // removeButton
+            // RemoveButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(131, 16);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(90, 23);
-            this.removeButton.TabIndex = 4;
-            this.removeButton.Text = "Удалить";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            this.RemoveButton.Location = new System.Drawing.Point(131, 16);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(90, 23);
+            this.RemoveButton.TabIndex = 4;
+            this.RemoveButton.Text = "Удалить";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // addButton
+            // AddButton
             // 
-            this.addButton.Location = new System.Drawing.Point(6, 16);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(90, 23);
-            this.addButton.TabIndex = 3;
-            this.addButton.Text = "Добавить";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.AddButton.Location = new System.Drawing.Point(6, 16);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(90, 23);
+            this.AddButton.TabIndex = 3;
+            this.AddButton.Text = "Добавить";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // Number
-            // 
-            this.Number.HeaderText = "№";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            this.Number.Width = 30;
             // 
             // MainForm
             // 
@@ -177,17 +177,17 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(514, 318);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.GroupBox);
+            this.Controls.Add(this.MenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.MenuStrip;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Main Form";
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.GroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
+            this.MenuStrip.ResumeLayout(false);
+            this.MenuStrip.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,17 +196,17 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.GroupBox GroupBox;
+        private System.Windows.Forms.DataGridView DataGridView;
+        private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.Button clearButton;
-        private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Button RemoveButton;
+        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
